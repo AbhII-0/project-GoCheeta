@@ -1,54 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+<!-- Basic -->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- Mobile Metas -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<!-- Site Metas -->
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 
-  <title>Urotaxi</title>
+<title>GoCheeta</title>
 
 
-  <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<!-- slider stylesheet -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="http://localhost:8081/GoCheeta/assets/css/bootstrap.css" />
+<!-- bootstrap core css -->
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8081/GoCheeta/assets/css/bootstrap.css" />
 
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+<!-- fonts style -->
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap"
+	rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="http://localhost:8081/GoCheeta/assets/css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="http://localhost:8081/GoCheeta/assets/css/responsive.css" rel="stylesheet" />
+<!-- Custom styles for this template -->
+<link href="http://localhost:8081/GoCheeta/assets/css/style.css"
+	rel="stylesheet" />
+<!-- responsive style -->
+<link href="http://localhost:8081/GoCheeta/assets/css/responsive.css"
+	rel="stylesheet" />
+
+<!-- buttons stylesheet -->
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8081/GoCheeta/assets/css/custom-style.css" />
+
+<!-- fontawsome stylesheet -->
+<script src="https://kit.fontawesome.com/57cb8f938d.js"
+	crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-  <div class="hero_area">
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              Urotaxi
-            </span>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+	<div class="hero_area">
+		<!-- header section strats -->
+		<header class="header_section">
+			<div class="container-fluid">
+				<nav class="navbar navbar-expand-lg custom_nav-container ">
+					<a class="navbar-brand" href="index.html"> <span
+						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px;">
+							GoCheeta <i class="fa-solid fa-taxi fa-xl"
+							style="color: #fffa00;"></i>
+					</span>
+					</a>
+					<!--<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>-->
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<!--<div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
@@ -71,96 +90,109 @@
                 </li>
               </ul>
             </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
-    <!-- slider section -->
-    <section class=" slider_section ">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-7 ">
-            <div class="box">
-              <div class="detail-box">
-                <h4>
-                  Welcome to
-                </h4>
-                <h1>
-                  UROTAXI
-                </h1>
-              </div>
-              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
+          </div>-->
+				</nav>
+			</div>
+		</header>
+		<!-- end header section -->
+		<!-- slider section -->
+		<section class=" slider_section ">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-7 ">
+						<div class="box">
+							<div class="detail-box">
+								<h4>Welcome to</h4>
+								<h1>GoCheeta</h1>
+							</div>
+							<div id="carouselExampleIndicators" class="carousel slide"
+								data-ride="carousel">
+								<ol class="carousel-indicators">
+									<li data-target="#carouselExampleIndicators" data-slide-to="0"
+										class="active"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+								</ol>
+								<div class="carousel-inner">
+									<div class="carousel-item active">
 
-                    <div class="img-box">
-                      <img src="http://localhost:8081/GoCheeta/assets/images/slider-img.png" alt="">
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="img-box">
-                      <img src="http://localhost:8081/GoCheeta/assets/images/slider-img.png" alt="">
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="img-box">
-                      <img src="http://localhost:8081/GoCheeta/assets/images/slider-img.png" alt="">
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="img-box">
-                      <img src="http://localhost:8081/GoCheeta/assets/images/slider-img.png" alt="">
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="img-box">
-                      <img src="http://localhost:8081/GoCheeta/assets/images/slider-img.png" alt="">
-                    </div>
-                  </div>
-                </div>
-              </div>
+										<div class="img-box">
+											<img
+												src="http://localhost:8081/GoCheeta/assets/images/bike_img.png"
+												alt="">
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="img-box">
+											<img
+												src="http://localhost:8081/GoCheeta/assets/images/car-img.png"
+												alt="">
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="img-box">
+											<img
+												src="http://localhost:8081/GoCheeta/assets/images/car-img-2.png"
+												alt="">
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="img-box">
+											<img
+												src="http://localhost:8081/GoCheeta/assets/images/van-img.png"
+												alt="">
+										</div>
+									</div>
+									<!--<div class="carousel-item">
+										<div class="img-box">
+											<img
+												src="http://localhost:8081/GoCheeta/assets/images/slider-img.png"
+												alt="">
+										</div>
+									</div>-->
+								</div>
+							</div>
+						</div>
+					</div>
 
-              <div class="btn-box">
-                <a href="" class="btn-1">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-5 ">
-            <div class="slider_form">
-              <h4>
-                Get A Taxi Now
-              </h4>
-              <form action="">
-                <input type="text" placeholder="Car Type">
-                <input type="text" placeholder="Pick Up Location">
-                <input type="text" placeholder="Drop Location">
-                <div class="btm_input">
-                  <input type="text" placeholder="Your Phone Number">
-                  <button>Book Now</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+					<div class="col-lg-4 col-md-7 landing-des-div" style="margin-left: 100px">
 
-    </section>
-    <!-- end slider section -->
-  </div>
+						<h2 class="landing-des">
+							<span style="background-color: yellow; padding: 5px">Go
+								With</span> <span
+								style="color: yellow; background-color: black; padding: 5px">GoCheeta...!</span>
+						</h2>
 
-  <!-- about section -->
+						<p>Make Your Journey With Us...!</p>
+						<h3>
+							<span style="color: red;"> SAFE & </span> TRUST
+						</h3>
 
-  <section class="about_section layout_padding">
+						<div class="btn-box-cus">
+							<a href="" class="btn-1-cus"> SIGN IN </a>
+						</div>
+
+						<div class="btn-box-cus">
+							<a href="" class="btn-1-cus"> SIGN UP </a>
+						</div>
+
+						<div class="btn-box-cus" >
+							<a href="" class="btn-1-cus" style="width: 200px"> TAKE A LOOK </a>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</section>
+		<!-- end slider section -->
+	</div>
+
+	<!-- about section -->
+
+	<!--<section class="about_section layout_padding">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-4 col-md-5 offset-lg-2 offset-md-1">
@@ -184,13 +216,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
-  <!-- end about section -->
+	<!-- end about section -->
 
-  <!-- service section -->
+	<!-- service section -->
 
-  <section class="service_section layout_padding">
+	<!--<section class="service_section layout_padding">
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -249,13 +281,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
-  <!-- end service section -->
+	<!-- end service section -->
 
-  <!-- news section -->
+	<!-- news section -->
 
-  <section class="news_section layout_padding">
+	<!--<section class="news_section layout_padding">
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -320,13 +352,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
-  <!-- end news section -->
+	<!-- end news section -->
 
-  <!-- client section -->
+	<!-- client section -->
 
-  <section class="client_section layout_padding-bottom">
+	<!--<section class="client_section layout_padding-bottom">
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -374,13 +406,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
-  <!-- end client section -->
+	<!-- end client section -->
 
-  <!-- contact section -->
+	<!-- contact section -->
 
-  <section class="contact_section layout_padding-bottom">
+	<!--<section class="contact_section layout_padding-bottom">
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -411,12 +443,12 @@
         </div>
       </div>
     </div>
-  </section>
-  <!-- end contact section -->
+  </section>-->
+	<!-- end contact section -->
 
-  <!-- app section -->
+	<!-- app section -->
 
-  <section class="app_section layout_padding2">
+	<!--<section class="app_section layout_padding2">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -457,13 +489,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
-  <!-- end app section -->
+	<!-- end app section -->
 
-  <!-- why section -->
+	<!-- why section -->
 
-  <section class="why_section layout_padding">
+	<!--<section class="why_section layout_padding">
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -516,13 +548,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
-  <!-- end why section -->
+	<!-- end why section -->
 
-  <!-- info section -->
+	<!-- info section -->
 
-  <section class="info_section layout_padding-top layout_padding2-bottom">
+	<!--<section class="info_section layout_padding-top layout_padding2-bottom">
     <div class="container">
       <div class="box">
         <div class="info_form">
@@ -585,49 +617,52 @@
       </div>
     </div>
 
-  </section>
+  </section>-->
 
-  <!-- end info section -->
+	<!-- end info section -->
 
-  <!-- footer section -->
-  <section class="container-fluid footer_section">
-    <div class="container">
-      <p>
-        &copy; 2021 All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
-      </p>
-    </div>
-  </section>
-  <!-- footer section -->
+	<!-- footer section -->
+	<section class="container-fluid footer_section">
+		<div class="container">
+			<p>
+				&copy; 2022 All Rights Reserved By <a href="#">GoCheeta</a>
+			</p>
+		</div>
+	</section>
+	<!-- footer section -->
 
-  <script type="text/javascript" src="http://localhost:8081/GoCheeta/assets/js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="http://localhost:8081/GoCheeta/assets/js/bootstrap.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-  </script>
+	<script type="text/javascript"
+		src="http://localhost:8081/GoCheeta/assets/js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript"
+		src="http://localhost:8081/GoCheeta/assets/js/bootstrap.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+		
+	</script>
 
 
-  <!-- owl carousel script -->
-  <script type="text/javascript">
-    $(".owl-carousel").owlCarousel({
-      loop: true,
-      margin: 20,
-      navText: [],
-      autoplay: true,
-      autoplayHoverPause: true,
-      responsive: {
-        0: {
-          items: 1
-        },
-        768: {
-          items: 2
-        },
-        1000: {
-          items: 2
-        }
-      }
-    });
-  </script>
-  <!-- end owl carousel script -->
+	<!-- owl carousel script -->
+	<script type="text/javascript">
+		$(".owl-carousel").owlCarousel({
+			loop : true,
+			margin : 20,
+			navText : [],
+			autoplay : true,
+			autoplayHoverPause : true,
+			responsive : {
+				0 : {
+					items : 1
+				},
+				768 : {
+					items : 2
+				},
+				1000 : {
+					items : 2
+				}
+			}
+		});
+	</script>
+	<!-- end owl carousel script -->
 
 </body>
 

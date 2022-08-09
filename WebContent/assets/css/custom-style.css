@@ -1,0 +1,38 @@
+.btn-box-cus a {
+	text-align: center;
+	display: inline-block;
+	padding: 8px 30px;
+	border: 1px solid #0b0b0a;
+	background-color: transparent;
+	color: #0b0b0a;
+	z-index: 100;
+	margin-top: 20px;
+	width: 150px;
+}
+
+.btn-box-cus a:hover {
+	background-color: #0b0b0a;
+	color: #ffffff;
+}
+
+.landing-des {
+	margin-top: 20px;
+}
+
+@media ( max-width : 456px) {
+	.landing-des-div {
+		margin-left: 50px !important;
+	}
+	.landing-des-div p, .landing-des-div h3 {
+		font-size: medium !important;
+	}
+	.landing-des {
+		font-size: medium !important;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1069px){
+	.landing-des{
+		font-size: 27px !important;
+	}
+}
