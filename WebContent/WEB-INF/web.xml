@@ -4,5 +4,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 
+	<context-param>
+		<param-name>basePath</param-name>
+		<param-value>http://localhost:8081/GoCheeta</param-value>
+	</context-param>
 
 </web-app>
