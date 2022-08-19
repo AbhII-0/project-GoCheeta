@@ -17,6 +17,7 @@
 
 <title>GoCheeta</title>
 
+
 <!-- slider stylesheet -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
@@ -44,13 +45,49 @@
 <!-- fontawsome stylesheet -->
 <script src="https://kit.fontawesome.com/57cb8f938d.js"
 	crossorigin="anonymous"></script>
+</head>
+
 <body>
 
 	<div class="hero_area">
 		<!-- header section strats -->
-		<jsp:include page="/views/layouts/header-some/index.jsp" />
-		<!-- end header section -->
+		<header class="header_section">
+			<div class="container-fluid">
+				<nav class="navbar navbar-expand-lg custom_nav-container ">
+					<a class="navbar-brand" href="index.html"> <span
+						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px;">
+							GoCheeta <i class="fa-solid fa-taxi fa-xl"
+							style="color: #fffa00;"></i>
+					</span>
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<div
+							class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+							<ul class="navbar-nav  ">
+								<li class="nav-item active"><a class="nav-link"
+									href="index.html"><i class="fa-regular fa-square-plus"></i>
+										ADD A BOOKING <span class="sr-only">(current)</span></a></li>
+								<li class="nav-item"><a class="nav-link" href="about.html"><i
+										class="fa-solid fa-clock-rotate-left"></i> MY BOOKINGS</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="contact.html"><i class="fa-solid fa-headset"></i>
+										Contact Us</a></li>
+								<li class="nav-item"><a class="nav-link" href="#"><i
+										class="fa-solid fa-user-astronaut"></i> ACCOUNT</a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<!-- end header section -->
 		<!-- slider section -->
 		<section class=" slider_section ">
 			<div class="container-fluid">
@@ -75,28 +112,26 @@
 
 										<div class="img-box">
 											<img
-												src="http://localhost:8081/GoCheeta/assets/images/bike_img.png"
+												src="${initParam['basePath']}/assets/images/bike_img.png"
+												alt="">
+										</div>
+									</div>
+									<div class="carousel-item">
+										<div class="img-box">
+											<img src="${initParam['basePath']}/assets/images/car-img.png"
 												alt="">
 										</div>
 									</div>
 									<div class="carousel-item">
 										<div class="img-box">
 											<img
-												src="http://localhost:8081/GoCheeta/assets/images/car-img.png"
+												src="${initParam['basePath']}/assets/images/car-img-2.png"
 												alt="">
 										</div>
 									</div>
 									<div class="carousel-item">
 										<div class="img-box">
-											<img
-												src="http://localhost:8081/GoCheeta/assets/images/car-img-2.png"
-												alt="">
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="img-box">
-											<img
-												src="http://localhost:8081/GoCheeta/assets/images/van-img.png"
+											<img src="${initParam['basePath']}/assets/images/van-img.png"
 												alt="">
 										</div>
 									</div>
@@ -120,11 +155,8 @@
 						</h3>
 
 						<div class="btn-box-cus">
-							<a href="" class="btn-1-cus"> SIGN IN </a>
-						</div>
-
-						<div class="btn-box-cus">
-							<a href="" class="btn-1-cus"> SIGN UP </a>
+							<a href="" class="btn-1-cus" style="width: 220px"><i
+								class="fa-regular fa-square-plus"></i> MAKE A BOOKING </a>
 						</div>
 
 					</div>
@@ -136,114 +168,6 @@
 		<!-- end slider section -->
 	</div>
 
-	<!-- app section -->
-
-	<section class="app_section layout_padding2">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="detail-box">
-						<h2>Download Our app</h2>
-						<div class="text-box">
-							<h5>details</h5>
-							<p>It is a long established fact that a reader will be
-								distracted by the readable content of a page when distribution
-								of letters</p>
-						</div>
-						<div class="text-box">
-							<h5>How it works</h5>
-							<p>It is a long established fact that a reader will be
-								distracted by the readable content of a page when distribution
-								of letters</p>
-						</div>
-						<div class="btn-box">
-							<a href=""> <img
-								src="http://localhost:8081/GoCheeta/assets/images/playstore.png"
-								alt="">
-							</a> <a href=""> <img
-								src="http://localhost:8081/GoCheeta/assets/images/appstore.png"
-								alt="">
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="img-box">
-						<img src="http://localhost:8081/GoCheeta/assets/images/mobile.png"
-							alt="">
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- end app section -->
-
-	<!-- why section -->
-
-	<section class="why_section layout_padding">
-		<div class="container">
-			<div class="heading_container">
-				<h2>
-					Why <br> Choose Us
-				</h2>
-			</div>
-			<div class="why_container">
-				<div class="box">
-					<div class="img-box">
-						<img
-							src="http://localhost:8081/GoCheeta/assets/images/delivery-man-white.png"
-							alt="" class="img-1"> <img
-							src="http://localhost:8081/GoCheeta/assets/images/delivery-man-black.png"
-							alt="" class="img-2">
-					</div>
-					<div class="detail-box">
-						<h5>Best Drivers</h5>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-						</p>
-					</div>
-				</div>
-				<div class="box">
-					<div class="img-box">
-						<img
-							src="http://localhost:8081/GoCheeta/assets/images/shield-white.png"
-							alt="" class="img-1"> <img
-							src="http://localhost:8081/GoCheeta/assets/images/shield-black.png"
-							alt="" class="img-2">
-					</div>
-					<div class="detail-box">
-						<h5>Safe and Secure</h5>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-						</p>
-					</div>
-				</div>
-				<div class="box">
-					<div class="img-box">
-						<img
-							src="http://localhost:8081/GoCheeta/assets/images/repairing-service-white.png"
-							alt="" class="img-1"> <img
-							src="http://localhost:8081/GoCheeta/assets/images/repairing-service-black.png"
-							alt="" class="img-2">
-					</div>
-					<div class="detail-box">
-						<h5>24x7 support</h5>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- end why section -->
-
-	<!-- info section -->
-	<jsp:include page="/views/layouts/info/index.jsp" />
-	<!-- end info section -->
-
 	<!-- footer section -->
 	<jsp:include page="/views/layouts/footer/index.jsp" />
 	<!-- footer section -->
@@ -253,7 +177,7 @@
 	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/bootstrap.js"></script>
 	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
 		
 	</script>
 

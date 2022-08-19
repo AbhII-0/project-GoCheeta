@@ -6,17 +6,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GoCheeta | SIGN UP</title>
 
-<!-- signIN/UP  CSS-->
+<!-- sign UP  CSS-->
 <link rel="stylesheet" type="text/css"
 	href="${initParam['basePath']}/assets/css/register.css" />
+	
+<!--scrollbar -->
+<link rel="stylesheet" type="text/css"
+	href="${initParam['basePath']}/assets/css/scrollbar.css" />
 
 <!-- fontawsome stylesheet -->
 <script src="https://kit.fontawesome.com/57cb8f938d.js"
 	crossorigin="anonymous"></script>
 <body>
-
+	<div>
+	<h4 id="issue-alert" class="issue-alert-none">Please Check All Fields Corectly...!</h4>
+	</div>
 	<div class="popup" style="height: auto;">
-		<form class="signinForm" onsubmit="return false" action="">
+		<form class="signinForm" action="${initParam['basePath']}/views/user/menu">
 			<h1 class="title" style="text-align: center; margin-bottom: 10px;">SIGN
 				UP</h1>
 
@@ -37,17 +43,31 @@
 			</div>
 
 
-			<input type="text" name="userName" id="userName"
+			<input class="required" type="text" name="userName" id="userName"
 				placeholder="User Name" autocomplete="off" required="required">
-			<input type="email" name="email" id="email" placeholder="E-Mail"
-				autocomplete="off" required="required"> <input type="number"
-				name="tp" id="tp" placeholder="Mobile Number" autocomplete="off"
-				required="required" min="0"> <input type="password"
+			<input class="required" type="email" name="email" id="email"
+				placeholder="E-Mail" autocomplete="off" required="required">
+			<input class="required" type="number" name="tp" id="tp"
+				placeholder="Mobile Number" autocomplete="off" required="required"
+				min="0"> <input class="required" type="password"
 				name="password" id="password" placeholder="Password"
-				required="required">
-			<button class="submit-btn"
-				style="margin-left: 30%; margin-right: 30%; margin-top: 10px;">SIGN
-				UP</button>
+				required="required"
+				title="For Passwor Special Charactor, Number, Min Length 8, Capital & Simple Letters Required...!">
+			<div id="pBar" style="margin-left: 3%; margin-right: 3%;">
+				<span class="">
+					<div></div>
+				</span>
+			</div>
+			<div>
+				<input class="required" id="termCondition" name="termCondition" type="checkbox"
+					aria-label="Checkbox for term & Condition"
+					style="backdrop-filter: none; height: 15px; width: 15px; margin-top: 3%;"
+					required> <label style="font-size: medium;"
+					for="termCondition"> Agree For Term & Conditions.</label> <a
+					style="color: yellow; text-decoration: none" href="">SEE...!</a>
+			</div>
+			<button class="submit-btn sign-up-btn"
+				style="margin-left: 30%; margin-right: 30%; margin-top: 10px;">SIGN UP</button>
 			<hr>
 			<div class="options">
 				<div>
@@ -60,5 +80,7 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/image-upload.js"></script>
+	<script type="text/javascript"
+		src="${initParam['basePath']}/assets/js/scrollbar.js"></script>
 </body>
 </html>

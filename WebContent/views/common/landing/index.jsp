@@ -153,13 +153,7 @@
 	</div>
 		
 	<!-- footer section -->
-	<section class="container-fluid footer_section">
-		<div class="container">
-			<p>
-				&copy; 2022 All Rights Reserved By <a href="#">GoCheeta</a>
-			</p>
-		</div>
-	</section>
+	<jsp:include page="/views/layouts/footer/index.jsp" />
 	<!-- footer section -->
 
 	<script type="text/javascript"
