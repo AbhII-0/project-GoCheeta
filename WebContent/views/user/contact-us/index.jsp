@@ -15,7 +15,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 
-<title>GoCheeta</title>
+<title>GoCheeta | CONTACT US</title>
 
 
 <!-- slider stylesheet -->
@@ -60,98 +60,72 @@
 							style="color: #fffa00;"></i>
 					</span>
 					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<div
+							class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+							<ul class="navbar-nav  ">
+								<li class="nav-item active"><a class="nav-link"
+									href="index.html"><i class="fa-regular fa-square-plus"></i>
+										ADD A BOOKING <span class="sr-only">(current)</span></a></li>
+								<li class="nav-item"><a class="nav-link" href="about.html"><i
+										class="fa-solid fa-clock-rotate-left"></i> MY BOOKINGS</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="contact.html"><i class="fa-solid fa-headset"></i>
+										Contact Us</a></li>
+								<li class="nav-item"><a class="nav-link" href="#"><i
+										class="fa-solid fa-user-astronaut"></i> ACCOUNT</a></li>
+								<li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT</a></li>
+							</ul>
+						</div>
+					</div>
 				</nav>
 			</div>
 		</header>
 		<!-- end header section -->
-		<!-- slider section -->
-		<section class=" slider_section ">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-7 ">
-						<div class="box">
-							<div class="detail-box">
-								<h4>Welcome to</h4>
-								<h1>GoCheeta</h1>
-							</div>
-							<div id="carouselExampleIndicators" class="carousel slide"
-								data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#carouselExampleIndicators" data-slide-to="0"
-										class="active"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-								</ol>
-								<div class="carousel-inner">
-									<div class="carousel-item active">
 
-										<div class="img-box">
-											<img
-												src="${initParam['basePath']}/assets/images/bike_img.png"
-												alt="">
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="img-box">
-											<img
-												src="${initParam['basePath']}/assets/images/car-img.png"
-												alt="">
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="img-box">
-											<img
-												src="${initParam['basePath']}/assets/images/car-img-2.png"
-												alt="">
-										</div>
-									</div>
-									<div class="carousel-item">
-										<div class="img-box">
-											<img
-												src="${initParam['basePath']}/assets/images/van-img.png"
-												alt="">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+		<!-- contact section -->
 
-					<div class="col-lg-4 col-md-7 landing-des-div" style="margin-left: 100px">
-
-						<h2 class="landing-des">
-							<span style="background-color: yellow; padding: 5px">Go
-								With</span> <span
-								style="color: yellow; background-color: black; padding: 5px">GoCheeta...!</span>
-						</h2>
-
-						<p>Make Your Journey With Us...!</p>
-						<h3>
-							<span style="color: red;"> SAFE & </span> TRUST
-						</h3>
-
-						<div class="btn-box-cus">
-							<a href="" class="btn-1-cus"> SIGN IN </a>
-						</div>
-
-						<div class="btn-box-cus">
-							<a href="" class="btn-1-cus"> SIGN UP </a>
-						</div>
-
-						<div class="btn-box-cus" >
-							<a href="" class="btn-1-cus" style="width: 200px"> TAKE A LOOK </a>
-						</div>
-
-					</div>
-
+		<section class="contact_section layout_padding">
+			<div class="container">
+				<div class="heading_container">
+					<h2>
+						Any Problems <br> Any Questions
+					</h2>
 				</div>
 			</div>
-
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-5  offset-md-1">
+						<div class="contact_form">
+							<h4>Get In touch</h4>
+							<form action="">
+								<input type="text" placeholder="Name"> <input
+									type="text" placeholder="Phone Number"> <input
+									type="text" placeholder="Message" class="message_input">
+								<button>Send</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-6 px-0">
+						<div class="img-box">
+							<img src="${initParam['basePath']}/assets/images/contact-img.png"
+								alt="">
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
-		<!-- end slider section -->
+		<!-- end contact section -->
+
 	</div>
-		
+
 	<!-- footer section -->
 	<jsp:include page="/views/layouts/footer/index.jsp" />
 	<!-- footer section -->

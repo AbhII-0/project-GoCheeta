@@ -81,6 +81,7 @@
 										Contact Us</a></li>
 								<li class="nav-item"><a class="nav-link" href="#"><i
 										class="fa-solid fa-user-astronaut"></i> ACCOUNT</a></li>
+								<li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT</a></li>
 							</ul>
 						</div>
 					</div>

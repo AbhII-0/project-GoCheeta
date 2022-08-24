@@ -3,6 +3,24 @@ body{
 	min-width: fit-content;
 }
 
+.custom_nav-container .navbar-nav .nav-item .nav-link {
+    font-weight: bold;
+    background-color: yellow;
+    margin: 10px 20px;
+    padding: 11px;
+    color: #282828;
+    text-align: center;
+    position: relative;
+    text-transform: uppercase;
+    border-radius: 10px;
+}
+
+@media ( max-width : 1154px) and (min-width: 992px){
+.custom_nav-container .navbar-nav .nav-item .nav-link {
+	font-size: 10px
+}
+}
+
 .hero_area{
 	height: auto !important;
 	min-height: 100vh!important;

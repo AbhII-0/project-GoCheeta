@@ -75,28 +75,28 @@
 
 										<div class="img-box">
 											<img
-												src="http://localhost:8081/GoCheeta/assets/images/bike_img.png"
+												src="${initParam['basePath']}/assets/images/bike_img.png"
 												alt="">
 										</div>
 									</div>
 									<div class="carousel-item">
 										<div class="img-box">
 											<img
-												src="http://localhost:8081/GoCheeta/assets/images/car-img.png"
+												src="${initParam['basePath']}/assets/images/car-img.png"
 												alt="">
 										</div>
 									</div>
 									<div class="carousel-item">
 										<div class="img-box">
 											<img
-												src="http://localhost:8081/GoCheeta/assets/images/car-img-2.png"
+												src="${initParam['basePath']}/assets/images/car-img-2.png"
 												alt="">
 										</div>
 									</div>
 									<div class="carousel-item">
 										<div class="img-box">
 											<img
-												src="http://localhost:8081/GoCheeta/assets/images/van-img.png"
+												src="${initParam['basePath']}/assets/images/van-img.png"
 												alt="">
 										</div>
 									</div>
@@ -158,10 +158,10 @@
 						</div>
 						<div class="btn-box">
 							<a href=""> <img
-								src="http://localhost:8081/GoCheeta/assets/images/playstore.png"
+								src="${initParam['basePath']}/assets/images/playstore.png"
 								alt="">
 							</a> <a href=""> <img
-								src="http://localhost:8081/GoCheeta/assets/images/appstore.png"
+								src="${initParam['basePath']}/assets/images/appstore.png"
 								alt="">
 							</a>
 						</div>
@@ -169,7 +169,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="img-box">
-						<img src="http://localhost:8081/GoCheeta/assets/images/mobile.png"
+						<img src="${initParam['basePath']}/assets/images/mobile.png"
 							alt="">
 					</div>
 				</div>
@@ -192,9 +192,9 @@
 				<div class="box">
 					<div class="img-box">
 						<img
-							src="http://localhost:8081/GoCheeta/assets/images/delivery-man-white.png"
+							src="${initParam['basePath']}/assets/images/delivery-man-white.png"
 							alt="" class="img-1"> <img
-							src="http://localhost:8081/GoCheeta/assets/images/delivery-man-black.png"
+							src="${initParam['basePath']}/assets/images/delivery-man-black.png"
 							alt="" class="img-2">
 					</div>
 					<div class="detail-box">
@@ -207,9 +207,9 @@
 				<div class="box">
 					<div class="img-box">
 						<img
-							src="http://localhost:8081/GoCheeta/assets/images/shield-white.png"
+							src="${initParam['basePath']}/assets/images/shield-white.png"
 							alt="" class="img-1"> <img
-							src="http://localhost:8081/GoCheeta/assets/images/shield-black.png"
+							src="${initParam['basePath']}/assets/images/shield-black.png"
 							alt="" class="img-2">
 					</div>
 					<div class="detail-box">
@@ -222,9 +222,9 @@
 				<div class="box">
 					<div class="img-box">
 						<img
-							src="http://localhost:8081/GoCheeta/assets/images/repairing-service-white.png"
+							src="${initParam['basePath']}/assets/images/repairing-service-white.png"
 							alt="" class="img-1"> <img
-							src="http://localhost:8081/GoCheeta/assets/images/repairing-service-black.png"
+							src="${initParam['basePath']}/assets/images/repairing-service-black.png"
 							alt="" class="img-2">
 					</div>
 					<div class="detail-box">
