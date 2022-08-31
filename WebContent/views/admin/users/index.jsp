@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,90 +32,12 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html"> <span
-					class="align-middle"><span
-						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px; font-size: x-large;">
-							GoCheeta <i class="fa-solid fa-taxi fa-xl"
-							style="color: #fffa00;"></i>
-					</span></span>
-				</a>
-
-				<ul class="sidebar-nav">
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=map-pin></i> <span class="align-middle">Branches</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="book"></i> <span class="align-middle">Bookings</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=users></i> <span class="align-middle">Drivers</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=triangle></i> <span class="align-middle">Vehicles Types</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=truck></i> <span class="align-middle">Vehicles</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=award></i> <span class="align-middle">Admin Users</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=bar-chart-2></i> <span class="align-middle">Reports</span>
-					</a></li>
-
-				</ul>
-
-			</div>
-		</nav>
+		
+		<jsp:include page="/views/admin/layouts/menu-sidebar.jsp" />
 
 		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle"> <i
-					class="hamburger align-self-center"></i>
-				</a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown"><a
-							class="nav-icon dropdown-toggle d-inline-block d-sm-none"
-							href="#" data-bs-toggle="dropdown"> <i class="align-middle"
-								data-feather="settings"></i>
-						</a> <a class="nav-link dropdown-toggle d-none d-sm-inline-block"
-							href="#" data-bs-toggle="dropdown"> <img
-								src="${initParam['basePath']}/assets/admin-kit/img/avatars/avatar.jpg"
-								class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span
-								class="text-dark">Charles Hall</span>
-						</a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i
-									class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
-							</div></li>
-					</ul>
-				</div>
-			</nav>
+			
+			<jsp:include page="/views/admin/layouts/nav-bar.jsp" />
 
 			<main class="content">
 			<div class="container-fluid p-0">
@@ -141,86 +64,42 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="adminUser" items="${adminUsersList}">
 							<tr>
-								<td>ADMIN 01</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">admin01@gmail.com</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">KANDY</td>
-								<td><span class="badge bg-warning">On Going</span></td>
+								<td><c:out value="${adminUser.admin_user_name}" /></td>
+								<td class="d-none d-xl-table-cell d-sm-table-cell"><c:out value="${adminUser.admin_user_email}" /></td>
+								
+								<c:set var = "adminUserBranchID" value = "${adminUser.branches_branch_id}"/>
+								<c:set var = "adminUserBranchName" value = "${''}"/>
+								
+								<c:forEach var="branch" items="${listBranches}">
+								<c:if test="${adminUserBranchID == branch.branch_id}">
+								<c:set var = "adminUserBranchName" value = "${branch.branch_loaction}"/>
+								</c:if>
+								</c:forEach>
+								
+								<td class="d-none d-xl-table-cell d-sm-table-cell"><c:out value="${adminUserBranchName}" /></td>
+								
+								
+								<c:set var = "adminUserStatus" value = "${adminUser.admin_user_account_status}"/>
+								<c:if test="${adminUserStatus == 1}">
+								<td><span class="badge bg-success">ONLINE</span></td>
+								</c:if>
+								<c:if test="${adminUserStatus == 0}">
+								<td><span class="badge bg-danger">OFFLINE</span></td>
+								</c:if>
 								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
+										data-whatever="<c:out value="${adminUser.admin_user_id}" />" class="btn btn-primary btn-sm">
 										<i class="fa-solid fa-pen-to-square"></i> EDIT
 									</button></td>
+								<input id="userName<c:out value="${adminUser.admin_user_id}" />" type="hidden" value="<c:out value="${adminUser.admin_user_name}" />"/>
+								<input id="userMail<c:out value="${adminUser.admin_user_id}" />" type="hidden" value="<c:out value="${adminUser.admin_user_email}" />"/>
+								<input id="userTP<c:out value="${adminUser.admin_user_id}" />" type="hidden" value="<c:out value="${adminUser.admin_user_tp_number}" />"/>
+								<input id="userStatus<c:out value="${adminUser.admin_user_id}" />" type="hidden" value="<c:out value="${adminUser.admin_user_account_status}" />"/>
+								<input id="userBranchID<c:out value="${adminUser.admin_user_id}" />" type="hidden" value="<c:out value="${adminUser.branches_branch_id}" />"/>
+								<input id="userRoleID<c:out value="${adminUser.admin_user_id}" />" type="hidden" value="<c:out value="${adminUser.user_roles_user_role_id}" />"/>
 							</tr>
-							<tr>
-								<td>ADMIN 01</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">admin01@gmail.com</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">KANDY</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>ADMIN 01</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">admin01@gmail.com</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">KANDY</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>ADMIN 01</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">admin01@gmail.com</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">KANDY</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>ADMIN 01</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">admin01@gmail.com</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">KANDY</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>ADMIN 01</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">admin01@gmail.com</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">KANDY</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>ADMIN 01</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">admin01@gmail.com</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">KANDY</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>ADMIN 01</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">admin01@gmail.com</td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">KANDY</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 
@@ -241,57 +120,59 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form id="updateVehiclesType" action="index.jsp">
+									<form id="updateUser" method="post" action="/GoCheeta/admin/users/update">
+									<input type="hidden" id="edit-adminUserID" name="edit-adminUserID" value="">
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">User Name:</label> 
-												<input required="required" type="text" class="form-control"
+												<input id="edit-adminUserName" name="edit-adminUserName" required="required" type="text" class="form-control"
 												placeholder="Jhone Doe">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">E-Mail:</label> 
-												<input required="required" type="email" class="form-control"
+												<input id="edit-adminUserMail" name="edit-adminUserMail" required="required" type="email" class="form-control"
 												placeholder="admin@gmail.com">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Mobile Number:</label> 
-												<input required="required" type="email" class="form-control"
+												<input id="edit-adminUserTP" name="edit-adminUserTP" required="required" type="text" class="form-control"
 												placeholder="0714567890">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Branch:</label>
-											<select required="required" class="form-select mb-3">
+											<select id="edit-adminUserBranch" name="edit-adminUserBranch" required="required" class="form-select mb-3">
 												<option selected value="">Select Branch</option>
-												<option>KANDY</option>
-												<option>MATALE</option>
+												<c:forEach var="branch" items="${listBranches}">
+												<option value="<c:out value="${branch.branch_id}" />"><c:out value="${branch.branch_loaction}" /></option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Password:</label> 
-												<input required="required" type="password" class="form-control"
+												<input id="edit-adminUserPassword" name="edit-adminUserPassword"  type="password" class="form-control"
 												placeholder="Password">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">User Role:</label>
-											<select required="required" class="form-select mb-3">
+											<select id="edit-adminUserRole" name="edit-adminUserRole" required="required" class="form-select mb-3">
 												<option selected value="">Select User Role</option>
-												<option>Manager</option>
-												<option>IT HEAD</option>
-												<option>USER</option>
+												<c:forEach var="userRole" items="${user_Roles}">
+												<option value="<c:out value="${userRole.user_role_id}" />"><c:out value="${userRole.user_role}" /></option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Status:</label>
-											<select required="required" class="form-select mb-3">
+											<select id="edit-adminUserStatus" name="edit-adminUserStatus" required="required" class="form-select mb-3">
 												<option selected value="">Select Status</option>
-												<option>ONLINE</option>
-												<option>OFFLINE</option>
+												<option value="1">ONLINE</option>
+												<option value="0">OFFLINE</option>
 											</select>
 										</div>
 									</form>
@@ -299,7 +180,7 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Close</button>
-									<button form="updateVehiclesType" type="submit" class="btn btn-primary">Update</button>
+									<button form="updateUser" type="submit" class="btn btn-primary">Update</button>
 								</div>
 							</div>
 						</div>
@@ -323,57 +204,58 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form id="addNewVehiclesType" action="index.jsp">
+									<form id="addNewAdminUser" method="post" action="/GoCheeta/admin/users/add-new">
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">User Name:</label> 
-												<input required="required" type="text" class="form-control"
+												<input name="add-new-AdminUserName" required="required" type="text" class="form-control"
 												placeholder="Jhone Doe">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">E-Mail:</label> 
-												<input required="required" type="email" class="form-control"
+												<input name="add-new-AdminUserMail" required="required" type="email" class="form-control"
 												placeholder="admin@gmail.com">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Mobile Number:</label> 
-												<input required="required" type="email" class="form-control"
+												<input name="add-new-AdminUserTP" required="required" type="tel" class="form-control"
 												placeholder="0714567890">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Branch:</label>
-											<select required="required" class="form-select mb-3">
+											<select name="add-new-AdminUserBranch" required="required" class="form-select mb-3">
 												<option selected value="">Select Branch</option>
-												<option>KANDY</option>
-												<option>MATALE</option>
+												<c:forEach var="branch" items="${listBranches}">
+												<option value="<c:out value="${branch.branch_id}" />"><c:out value="${branch.branch_loaction}" /></option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Password:</label> 
-												<input required="required" type="password" class="form-control"
+												<input name="add-new-AdminUserPassword" required="required" type="password" class="form-control"
 												placeholder="Password">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">User Role:</label>
-											<select required="required" class="form-select mb-3">
+											<select name="add-new-AdminUserRole" required="required" class="form-select mb-3">
 												<option selected value="">Select User Role</option>
-												<option>Manager</option>
-												<option>IT HEAD</option>
-												<option>USER</option>
+												<c:forEach var="userRole" items="${user_Roles}">
+												<option value="<c:out value="${userRole.user_role_id}" />"><c:out value="${userRole.user_role}" /></option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Status:</label>
-											<select required="required" class="form-select mb-3">
+											<select name="add-new-AdminUserStatus" required="required" class="form-select mb-3">
 												<option selected value="">Select Status</option>
-												<option>ONLINE</option>
-												<option>OFFLINE</option>
+												<option value="1">ONLINE</option>
+												<option value="0">OFFLINE</option>
 											</select>
 										</div>
 									</form>
@@ -381,7 +263,7 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Close</button>
-									<button form="addNewVehiclesType" type="submit" class="btn btn-primary">ADD</button>
+									<button form="addNewAdminUser" type="submit" class="btn btn-primary">ADD</button>
 								</div>
 							</div>
 						</div>
@@ -390,15 +272,48 @@
 
 					<nav aria-label="Page navigation example" style="margin-top: 5%;">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
+
+							<%
+								double branchCount = Integer.parseInt(request.getAttribute("adminUsersCount").toString());
+								double recordForPage = 8;
+								double pageCount = Math.ceil(branchCount / recordForPage);
+								int curntPage = 1;
+
+								if (request.getParameter("page") != null) {
+									curntPage = Integer.parseInt(request.getParameter("page"));
+								} else {
+									curntPage = 1;
+								}
+								if (curntPage > 1) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/admin/users?page=<%=curntPage - 1%>"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
+							<%
+								}
+								for (int i = 1; i <= pageCount; i++) {
+									if (curntPage == i) {
+							%>
+							<li class="page-item active"><a class="page-link"
+								href="/GoCheeta/admin/users?page=<%=i%>"><%=i%></a></li>
+							<%
+								}else{
+									%>
+									<li class="page-item"><a class="page-link"
+								href="/GoCheeta/admin/users?page=<%=i%>"><%=i%></a></li>
+									<%
+								}
+								}
+								if (curntPage < pageCount) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/admin/users?page=<%=curntPage + 1%>"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
+							<%
+								}
+							%>
 						</ul>
 					</nav>
 
@@ -427,6 +342,32 @@
 		src="${initParam['basePath']}/assets/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/bootstrap.js"></script>
+		
+	<script type="text/javascript">
+		$('#exampleModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget);
+			var recipient = button.data('whatever');
+			
+
+			var admin_user_name = $("#userName" + recipient).val();
+			var admin_user_email = $("#userMail" + recipient).val();
+			var admin_user_tp_number = $("#userTP" + recipient).val();
+			var admin_user_account_status = $("#userStatus" + recipient).val();
+			var user_role_id = $("#userRoleID" + recipient).val();
+			var branch_id = $("#userBranchID" + recipient).val();
+
+			var modal = $(this);
+			modal.find('#edit-adminUserID').val(recipient);
+
+			modal.find('#edit-adminUserName').val(admin_user_name);
+			modal.find('#edit-adminUserMail').val(admin_user_email);
+			modal.find('#edit-adminUserTP').val(admin_user_tp_number);
+			modal.find('#edit-adminUserBranch').val(branch_id);
+			modal.find('#edit-adminUserRole').val(user_role_id);
+			modal.find('#edit-adminUserStatus').val(admin_user_account_status);
+
+		})
+	</script>
 
 </body>
 

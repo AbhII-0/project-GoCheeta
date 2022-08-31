@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,90 +32,14 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html"> <span
-					class="align-middle"><span
-						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px; font-size: x-large;">
-							GoCheeta <i class="fa-solid fa-taxi fa-xl"
-							style="color: #fffa00;"></i>
-					</span></span>
-				</a>
+	
+			<jsp:include page="/views/admin/layouts/menu-sidebar.jsp" />
 
-				<ul class="sidebar-nav">
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=map-pin></i> <span class="align-middle">Branches</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="book"></i> <span class="align-middle">Bookings</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=users></i> <span class="align-middle">Drivers</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=triangle></i> <span class="align-middle">Vehicles Types</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=truck></i> <span class="align-middle">Vehicles</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=award></i> <span class="align-middle">Admin Users</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=bar-chart-2></i> <span class="align-middle">Reports</span>
-					</a></li>
-
-				</ul>
-
-			</div>
-		</nav>
-
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle"> <i
-					class="hamburger align-self-center"></i>
-				</a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown"><a
-							class="nav-icon dropdown-toggle d-inline-block d-sm-none"
-							href="#" data-bs-toggle="dropdown"> <i class="align-middle"
-								data-feather="settings"></i>
-						</a> <a class="nav-link dropdown-toggle d-none d-sm-inline-block"
-							href="#" data-bs-toggle="dropdown"> <img
-								src="${initParam['basePath']}/assets/admin-kit/img/avatars/avatar.jpg"
-								class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span
-								class="text-dark">Charles Hall</span>
-						</a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i
-									class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
-							</div></li>
-					</ul>
-				</div>
-			</nav>
+			<div class="main">
+			
+			<jsp:include page="/views/admin/layouts/nav-bar.jsp" />
+		
+			
 
 			<main class="content">
 			<div class="container-fluid p-0">
@@ -137,102 +62,50 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="booking" items="${bookings}">
 							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-warning">On Going</span></td>
+								<td class="d-none d-xl-table-cell d-sm-table-cell"><c:out value="${booking.booking_start_location}" /></td>
+								<td class="d-none d-xl-table-cell"><c:out value="${booking.booking_end_location}" /></td>
+								<td class="d-none d-xl-table-cell"><c:out value="${booking.booking_time}" /></td>
+								
+								<c:set var = "bookinStatus" value = "${booking.booking_status}"/>
+								<c:if test="${bookinStatus == 'ONGOING'}">
+								<td><span class="badge bg-primary">ON GOING</span></td>
+								</c:if>
+								<c:if test="${bookinStatus == 'PENDING'}">
+								<td><span class="badge bg-warning">PENDING</span></td>
+								</c:if>
+								<c:if test="${bookinStatus == 'COMPLETE'}">
+								<td><span class="badge bg-success">COMPLETE</span></td>
+								</c:if>
+								<c:if test="${bookinStatus == 'DRIVER CANCEL'}">
+								<td><span class="badge bg-danger">DRIVER CANCEL</span></td>
+								</c:if>
+								<c:if test="${bookinStatus == 'USER CANCEL'}">
+								<td><span class="badge bg-danger">USER CANCEL</span></td>
+								</c:if>
+								
+								<input id="bookingStatus<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_status}" />"/>
+								<input id="bookingPickLocation<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_start_location}" />"/>
+								<input id="bookingDropLocation<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_end_location}" />"/>
+								<input id="bookingDate<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_time}" />"/>
+								<input id="bookingPickTime<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_driver_get_user_time}" />"/>
+								<input id="bookingDropTime<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_driver_drop_user_time}" />"/>
+								<input id="bookingCharge<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.bookin_charge}" />"/>
+								<input id="bookingClientName<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.user_name}" />"/>
+								<input id="bookingClientTP<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.user_tp_number}" />"/>
+								<input id="bookingDriverName<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.driver_user_name}" />"/>
+								<input id="bookingDriverTP<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.driver_tp_number}" />"/>
+								<input id="bookingVehicleType<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.vehicle_number}" />"/>
+								<input id="bookingVehicleNumber<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.vehicle_type}" />"/>
+								<input id="bookingCancelReason<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_cancel_reason}" />"/>
+								
 								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
+										data-whatever="<c:out value="${booking.booking_id}" />" class="btn btn-primary btn-sm">
 										<i class="fa-solid fa-eye"></i> VIEW
 									</button></td>
 							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-danger">Cancelled</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 
@@ -247,7 +120,7 @@
 								<div class="modal-header">
 									<h5 style="font-weight: bold;" class="modal-title"
 										id="exampleModalLabel">
-										Booking Status : <span class="btn btn-success">JOUNURY
+										Booking Status : <span id="details-bookingStatus" class="btn">JOUNURY
 											END</span>
 									</h5>
 									<button type="button" class="close" data-dismiss="modal"
@@ -257,55 +130,61 @@
 								</div>
 								<div class="modal-body">
 									<form>
+										<input type="hidden" id="bookingID">
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Pick Up
 												Location:</label>
-											<p style="display: flex;">55 Sirimalwatta - Amunugama -
+											<p id="details-bookingPickLocation" style="display: flex;">55 Sirimalwatta - Amunugama -
 												Madawala Rd, Sirimalwatta</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Drop
 												Location:</label>
-											<p style="display: flex;">55 Sirimalwatta - Amunugama -
+											<p id="details-bookingDropLocation" style="display: flex;">55 Sirimalwatta - Amunugama -
 												Madawala Rd, Sirimalwatta</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Date:</label>
-											<p style="display: flex;">01-01-2021</p>
+											<p id="details-bookingTime" style="display: flex;">01-01-2021</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Pick Up
 												Time:</label>
-											<p style="display: flex;">01.15 PM</p>
+											<p id="details-bookingPickTime" style="display: flex;">01.15 PM</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Drop Time:</label>
-											<p style="display: flex;">04.15 PM</p>
+											<p id="details-bookingDropTime" style="display: flex;">04.15 PM</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Charge:</label>
-											<p style="display: flex;">RS. 2500.00</p>
+											<p id="details-bookingCharge" style="display: flex;">RS. 2500.00</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Client:</label>
-											<p style="display: flex;">Dexter Morgan | TP : 0711234567</p>
+											<p id="details-bookingClientDetails" style="display: flex;">Dexter Morgan | TP : 0711234567</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Driver:</label>
-											<p style="display: flex;">Dexter Morgan | TP : 0711234567</p>
+											<p id="details-bookingDriverDetails" style="display: flex;">Dexter Morgan | TP : 0711234567</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Vehicle:</label>
-											<p style="display: flex;">SUV | No : AAA - 8745</p>
+											<p id="details-bookingVehicleDetals" style="display: flex;">SUV | No : AAA - 8745</p>
+										</div>
+										<div id="bookingCancelReasonDiv" class="form-group" style="display: none;">
+											<label style="display: flex; font-weight: bold;"
+												for="message-text" class="col-form-label">Cancel Reason:</label>
+											<p id="details-bookingCancelReason" style="display: flex;">-</p>
 										</div>
 									</form>
 								</div>
@@ -320,15 +199,48 @@
 
 					<nav aria-label="Page navigation example" style="margin-top: 5%;">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
+
+							<%
+								double branchCount = Integer.parseInt(request.getAttribute("bookingsCount").toString());
+								double recordForPage = 8;
+								double pageCount = Math.ceil(branchCount / recordForPage);
+								int curntPage = 1;
+
+								if (request.getParameter("page") != null) {
+									curntPage = Integer.parseInt(request.getParameter("page"));
+								} else {
+									curntPage = 1;
+								}
+								if (curntPage > 1) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/admin/bookings?page=<%=curntPage - 1%>"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
+							<%
+								}
+								for (int i = 1; i <= pageCount; i++) {
+									if (curntPage == i) {
+							%>
+							<li class="page-item active"><a class="page-link"
+								href="/GoCheeta/admin/bookings?page=<%=i%>"><%=i%></a></li>
+							<%
+								}else{
+									%>
+									<li class="page-item"><a class="page-link"
+								href="/GoCheeta/admin/bookings?page=<%=i%>"><%=i%></a></li>
+									<%
+								}
+								}
+								if (curntPage < pageCount) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/admin/bookings?page=<%=curntPage + 1%>"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
+							<%
+								}
+							%>
 						</ul>
 					</nav>
 
@@ -357,6 +269,72 @@
 		src="${initParam['basePath']}/assets/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/bootstrap.js"></script>
+		
+	<script type="text/javascript">
+		$('#exampleModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget);
+			var recipient = button.data('whatever');
+			
+
+			var bookingStatus = $("#bookingStatus" + recipient).val();
+			var bookingPickLocation = $("#bookingPickLocation" + recipient).val();
+			var bookingDropLocation = $("#bookingDropLocation" + recipient).val();
+			var bookingDate = $("#bookingDate" + recipient).val();
+			var bookingPickTime = $("#bookingPickTime" + recipient).val();
+			var bookingDropTime = $("#bookingDropTime" + recipient).val();
+			var bookingCharge = $("#bookingCharge" + recipient).val();
+			var bookingClientName = $("#bookingClientName" + recipient).val();
+			var bookingClientTP = $("#bookingClientTP" + recipient).val();
+			var bookingDriverName = $("#bookingDriverName" + recipient).val();
+			var bookingDriverTP = $("#bookingDriverTP" + recipient).val();
+			var bookingVehicleType = $("#bookingVehicleType" + recipient).val();
+			var bookingVehicleNumber = $("#bookingVehicleNumber" + recipient).val();
+			var bookingCancelReason = $("#bookingCancelReason" + recipient).val();
+
+			var modal = $(this);
+			//modal.find('#edit-vehicleID').val(recipient);
+			
+			if(bookingPickTime == ""){
+				bookingPickTime = "-";
+			}
+			if(bookingDropTime == ""){
+				bookingDropTime = "-";
+			}
+			
+			
+			$('#details-bookingStatus').removeClass();
+			$('#details-bookingStatus').addClass("btn");
+			
+			if(bookingStatus == "PENDING"){				
+				$('#details-bookingStatus').addClass("btn-warning");
+			}else if (bookingStatus == "ONGOING") {
+				$('#details-bookingStatus').addClass("btn-primary");
+			}else if (bookingStatus == "COMPLETE") {
+				$('#details-bookingStatus').addClass("btn-success");
+			}else {
+				$('#details-bookingStatus').addClass("btn-danger");
+			}
+			
+			if(bookingCancelReason != ""){
+				$('#bookingCancelReasonDiv').css("display" ,"block")
+			}else{
+				$('#bookingCancelReasonDiv').css("display" ,"none")
+			}
+
+			modal.find('#details-bookingStatus').text(bookingStatus);
+			modal.find('#details-bookingPickLocation').text(bookingPickLocation);
+			modal.find('#details-bookingDropLocation').text(bookingDropLocation);
+			modal.find('#details-bookingTime').text(bookingDate);
+			modal.find('#details-bookingPickTime').text(bookingPickTime);
+			modal.find('#details-bookingDropTime').text(bookingDropTime);
+			modal.find('#details-bookingCharge').text(bookingCharge);
+			modal.find('#details-bookingClientDetails').text(bookingClientName+" | "+bookingClientTP);
+			modal.find('#details-bookingDriverDetails').text(bookingDriverName+" | "+bookingDriverTP);
+			modal.find('#details-bookingVehicleDetals').text(bookingVehicleType+" | "+bookingVehicleNumber);
+			modal.find('#details-bookingCancelReason').text(bookingCancelReason);
+
+		})
+	</script>
 
 </body>
 

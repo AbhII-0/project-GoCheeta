@@ -1,5 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="com.GoCheeta.dao.BranchesDAO"%>
+<%@page import="com.GoCheeta.model.Branches"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,90 +35,13 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html"> <span
-					class="align-middle"><span
-						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px; font-size: x-large;">
-							GoCheeta <i class="fa-solid fa-taxi fa-xl"
-							style="color: #fffa00;"></i>
-					</span></span>
-				</a>
+	
+			<jsp:include page="/views/admin/layouts/menu-sidebar.jsp" />
 
-				<ul class="sidebar-nav">
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=map-pin></i> <span class="align-middle">Branches</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="book"></i> <span class="align-middle">Bookings</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=users></i> <span class="align-middle">Drivers</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=triangle></i> <span class="align-middle">Vehicles Types</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=truck></i> <span class="align-middle">Vehicles</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=award></i> <span class="align-middle">Admin Users</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=bar-chart-2></i> <span class="align-middle">Reports</span>
-					</a></li>
-
-				</ul>
-
-			</div>
-		</nav>
-
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle"> <i
-					class="hamburger align-self-center"></i>
-				</a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown"><a
-							class="nav-icon dropdown-toggle d-inline-block d-sm-none"
-							href="#" data-bs-toggle="dropdown"> <i class="align-middle"
-								data-feather="settings"></i>
-						</a> <a class="nav-link dropdown-toggle d-none d-sm-inline-block"
-							href="#" data-bs-toggle="dropdown"> <img
-								src="${initParam['basePath']}/assets/admin-kit/img/avatars/avatar.jpg"
-								class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span
-								class="text-dark">Charles Hall</span>
-						</a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i
-									class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
-							</div></li>
-					</ul>
-				</div>
-			</nav>
+			<div class="main">
+			
+			<jsp:include page="/views/admin/layouts/nav-bar.jsp" />
+			
 
 			<main class="content">
 			<div class="container-fluid p-0">
@@ -136,72 +63,41 @@
 								<th>Branche Name</th>
 								<th>Branche Location</th>
 								<th>Branche Status</th>
-								<th class="d-none d-xl-table-cell d-sm-table-cell">Location Cordinate</th>
+								<th class="d-none d-xl-table-cell d-sm-table-cell">Location
+									Cordinate</th>
 								<th>EDIT</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>B001</td>
-								<td>Kandy</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">72.5682226,85.6478112</td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>B001</td>
-								<td>Kandy</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">72.5682226,85.6478112</td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>B001</td>
-								<td>Kandy</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">72.5682226,85.6478112</td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>B001</td>
-								<td>Kandy</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">72.5682226,85.6478112</td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>B001</td>
-								<td>Kandy</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">72.5682226,85.6478112</td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>B001</td>
-								<td>Kandy</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">72.5682226,85.6478112</td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							
+							<c:forEach var="branch" items="${listBranches}">
+								<tr>
+									<td id="branchName<c:out value="${branch.branch_id}" />"><c:out
+											value="${branch.branch_name}" /></td>
+									<td id="branchLocation<c:out value="${branch.branch_id}" />"><c:out
+											value="${branch.branch_loaction}" /></td>
+											
+									<c:set var = "branchStatus" value = "${branch.branche_status}"/>
+									<c:if test="${branchStatus == 1}">
+									<td><span class="badge bg-success">ONLINE</span></td>
+									</c:if>
+									<c:if test="${branchStatus == 0}">
+									<td><span class="badge bg-danger">OFFLINE</span></td>
+									</c:if>
+									
+									<input id="branchStatus<c:out value="${branch.branch_id}" />" type="hidden" value="${branchStatus}">
+										
+									<td id="branchCordinate<c:out value="${branch.branch_id}" />"
+										class="d-none d-xl-table-cell d-sm-table-cell"><c:out
+											value="${branch.brancheCordinate}" /></td>
+									<td><button
+											id="branchEdit<c:out value="${branch.branch_id}" />"
+											data-toggle="modal" data-target="#exampleModal"
+											data-whatever="<c:out value="${branch.branch_id}" />"
+											class="btn btn-primary btn-sm">
+											<i class="fa-solid fa-pen-to-square"></i> EDIT
+										</button></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 
@@ -222,33 +118,37 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form>
+									<form id="edit-branch" name="edit-branch" method="post"
+										action="/GoCheeta/admin/branches/update-branch">
+										<input type="hidden" id="branch-id" name="edit-branch-id"
+											value="">
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Branche Name:</label> 
-												<input type="text" class="form-control"
-												placeholder="B001">
-										</div>
-										<div class="form-group">
-											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Branche Location:</label> 
-												<input type="text" class="form-control"
-												placeholder="B001">
-										</div>
-										<div class="form-group">
-											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Location Cordinate:</label> 
-												<input type="text" class="form-control"
-												placeholder="72.364555,85.45544565">
+												for="message-text" class="col-form-label">Branche
+												Name:</label> <input id="edit-branch-name" name="edit-branch-name"
+												type="text" class="form-control">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Branche
-												Status:</label>
-											<select class="form-select mb-3">
+												Location:</label> <input id="edit-branch-location"
+												name="edit-branch-location" type="text" class="form-control">
+										</div>
+										<div class="form-group">
+											<label style="display: flex; font-weight: bold;"
+												for="message-text" class="col-form-label">Location
+												Cordinate:</label> <input id="edit-branch-cordinate"
+												name="edit-branch-cordinate" type="text"
+												class="form-control">
+										</div>
+										<div class="form-group">
+											<label style="display: flex; font-weight: bold;"
+												for="message-text" class="col-form-label">Branche
+												Status:</label> <select id="edit-branch-status"
+												name="edit-branch-status" class="form-select mb-3">
 												<option selected>Select Status</option>
-												<option>ONLINE</option>
-												<option>OFFLINE</option>
+												<option value="1">ONLINE</option>
+												<option value="0">OFFLINE</option>
 											</select>
 										</div>
 									</form>
@@ -256,7 +156,8 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Update</button>
+									<button form="edit-branch" type="submit"
+										class="btn btn-primary">Update</button>
 								</div>
 							</div>
 						</div>
@@ -280,33 +181,35 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form>
+									<form id="add-new-branch" name="add-new-branch" method="post"
+										action="/GoCheeta/admin/branches/add-new">
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Branche Name:</label> 
-												<input type="text" class="form-control"
-												placeholder="B001">
+												for="message-text" class="col-form-label">Branche
+												Name:</label> <input name="add-new-branch-name" type="text"
+												class="form-control" placeholder="B001">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Branche Location:</label> 
-												<input type="text" class="form-control"
-												placeholder="B001">
+												for="message-text" class="col-form-label">Branche
+												Location:</label> <input name="add-new-branch-loaction" type="text"
+												class="form-control" placeholder="B001">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Location Cordinate:</label> 
-												<input type="text" class="form-control"
+												for="message-text" class="col-form-label">Location
+												Cordinate:</label> <input name="add-new-branch-cordinate"
+												type="text" class="form-control"
 												placeholder="72.364555,85.45544565">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Branche
-												Status:</label>
-											<select class="form-select mb-3">
+												Status:</label> <select name="add-new-branch-status"
+												class="form-select mb-3">
 												<option selected>Select Status</option>
-												<option>ONLINE</option>
-												<option>OFFLINE</option>
+												<option value="1">ONLINE</option>
+												<option value="0">OFFLINE</option>
 											</select>
 										</div>
 									</form>
@@ -314,7 +217,8 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">ADD</button>
+									<button form="add-new-branch" type="submit"
+										class="btn btn-primary">ADD</button>
 								</div>
 							</div>
 						</div>
@@ -323,15 +227,48 @@
 
 					<nav aria-label="Page navigation example" style="margin-top: 5%;">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
+
+							<%
+								double branchCount = Integer.parseInt(request.getAttribute("branchCount").toString());
+								double recordForPage = 8;
+								double pageCount = Math.ceil(branchCount / recordForPage);
+								int curntPage = 1;
+
+								if (request.getParameter("page") != null) {
+									curntPage = Integer.parseInt(request.getParameter("page"));
+								} else {
+									curntPage = 1;
+								}
+								if (curntPage > 1) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/admin/branches?page=<%=curntPage - 1%>"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
+							<%
+								}
+								for (int i = 1; i <= pageCount; i++) {
+									if (curntPage == i) {
+							%>
+							<li class="page-item active"><a class="page-link"
+								href="/GoCheeta/admin/branches?page=<%=i%>"><%=i%></a></li>
+							<%
+								}else{
+									%>
+									<li class="page-item"><a class="page-link"
+								href="/GoCheeta/admin/branches?page=<%=i%>"><%=i%></a></li>
+									<%
+								}
+								}
+								if (curntPage < pageCount) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/admin/branches?page=<%=curntPage + 1%>"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
+							<%
+								}
+							%>
 						</ul>
 					</nav>
 
@@ -360,6 +297,28 @@
 		src="${initParam['basePath']}/assets/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/bootstrap.js"></script>
+
+	<script type="text/javascript">
+		$('#exampleModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget)
+			var recipient = button.data('whatever')
+
+			var branchName = $("#branchName" + recipient).text();
+			var branchLocation = $("#branchLocation" + recipient).text();
+			var branchCordinate = $("#branchCordinate" + recipient).text();
+			var branchStatus = $("#branchStatus" + recipient).val();
+
+			var modal = $(this)
+			modal.find('#branch-id').val(recipient)
+
+			modal.find('#edit-branch-name').val(branchName)
+			modal.find('#edit-branch-location').val(branchLocation)
+			modal.find('#edit-branch-cordinate').val(branchCordinate)
+			modal.find('#edit-branch-status').val(branchStatus)
+
+			//console.log(branchName);
+		})
+	</script>
 
 </body>
 

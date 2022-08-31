@@ -28,91 +28,15 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html"> <span
-					class="align-middle"><span
-						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px; font-size: x-large;">
-							GoCheeta <i class="fa-solid fa-taxi fa-xl"
-							style="color: #fffa00;"></i>
-					</span></span>
-				</a>
+		
 
-				<ul class="sidebar-nav">
-				
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=map-pin></i> <span class="align-middle">Branches</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="book"></i> <span class="align-middle">Bookings</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=users></i> <span class="align-middle">Drivers</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=triangle></i> <span class="align-middle">Vehicles Types</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=truck></i> <span class="align-middle">Vehicles</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=award></i> <span class="align-middle">Admin Users</span>
-					</a></li>
-					
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather=bar-chart-2></i> <span class="align-middle">Reports</span>
-					</a></li>
+		<jsp:include page="/views/admin/layouts/menu-sidebar.jsp" />
 
-				</ul>
-
-			</div>
-		</nav>
-
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle"> <i
-					class="hamburger align-self-center"></i>
-				</a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						
-						<li class="nav-item dropdown"><a
-							class="nav-icon dropdown-toggle d-inline-block d-sm-none"
-							href="#" data-bs-toggle="dropdown"> <i class="align-middle"
-								data-feather="settings"></i>
-						</a> <a class="nav-link dropdown-toggle d-none d-sm-inline-block"
-							href="#" data-bs-toggle="dropdown"> <img
-								src="${initParam['basePath']}/assets/admin-kit/img/avatars/avatar.jpg"
-								class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span
-								class="text-dark">Charles Hall</span>
-						</a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i
-									class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
-							</div></li>
-					</ul>
-				</div>
-			</nav>
+			<div class="main">
+			
+			<jsp:include page="/views/admin/layouts/nav-bar.jsp" />
+			
+			
 
 			<main class="content">
 			<div class="container-fluid p-0">

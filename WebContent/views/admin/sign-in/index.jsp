@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+System.out.println(session.getAttribute("adminUserId"));
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,16 +47,16 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="m-sm-4">
-								<form>
+								<form method="post" action="/GoCheeta/admin/signIn/">
 									<div class="mb-3">
 										<label class="form-label">User Name</label> <input
 											class="form-control form-control-lg" type="text"
-											name="userName" placeholder="Enter your user name" />
+											name="userName" required="required" placeholder="Enter your user name" />
 									</div>
 									<div class="mb-3">
 										<label class="form-label">Password</label> <input
 											class="form-control form-control-lg" type="password"
-											name="password" placeholder="Enter your password" /> <small>
+											name="password" required="required" placeholder="Enter your password" /> <small>
 											<a href="index.html">Forgot password?</a>
 										</small>
 									</div>
@@ -65,9 +68,9 @@
 										</label>
 									</div>
 									<div class="text-center mt-3">
-										<a href="index.html" class="btn btn-lg btn-primary">Sign
-											in</a>
-										<!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
+										<!--<a href="index.html" class="btn btn-lg btn-primary">Sign
+											in</a>-->
+										<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
 									</div>
 								</form>
 							</div>
