@@ -1,0 +1,75 @@
+/*Normal Broswer*/
+
+.scorllbar-custom ::-webkit-scrollbar {
+    width: 5px;
+}
+
+.scrollbar-track-custom ::-webkit-scrollbar-track {
+    background: transparent;
+    /* width: 5px; */
+}
+
+.scrollbar-thumb-custom ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #333a41;
+    /* box-shadow: 0 0 1px rgba(255, 255, 255, 0.5); */
+}
+
+.scrollbar-hover-custom ::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    border-radius: 4px;
+    width: 5px;
+    background-color: #333a41;
+}
+
+.scrollbar-fadeout ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+
+
+/*dy::-webkit-scrollbar {
+  width: 12px;               
+}
+
+body::-webkit-scrollbar-track {
+  background: orange;       
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: blue;    
+  border-radius: 20px;       
+  border: 3px solid orange;  
+}*/
+
+
+/*
+
+
+body {
+  scrollbar-width: thin;          
+  scrollbar-color: blue orange;   
+}
+
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: orange;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 3px solid orange;
+}
+*/
+
