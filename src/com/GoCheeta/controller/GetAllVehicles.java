@@ -71,10 +71,10 @@ public class GetAllVehicles extends HttpServlet {
 		int vehiclesCount = vehiclesDAO.selectVehicleCount();
 		request.setAttribute("vehiclesCount", vehiclesCount);
 
-		List<Vehicle_Types> listvehicleTypes = vehicle_TypesDAO.selectAllVehicleTypes(0, 100);
+		List<Vehicle_Types> listvehicleTypes = vehicle_TypesDAO.selectAllOnlineVehicleTypes(0, 100);
 		request.setAttribute("listvehicleTypes", listvehicleTypes);
 
-		List<Drivers> listDrivers = driversDAO.selectAllDrivers(0, 100);
+		List<Drivers> listDrivers = driversDAO.selectAllOnlineDrivers(0, 100);
 		request.setAttribute("listDrivers", listDrivers);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/vehicles/index.jsp");

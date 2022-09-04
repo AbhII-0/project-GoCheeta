@@ -12,12 +12,12 @@
 			</div>
 			<div class="info_links">
 				<ul>
-					<li class=" "><a class="" href="index.html">Home <span
+					<li class=" "><a class="" href="/GoCheeta/common/home">Home <span
 							class="sr-only">(current)</span></a></li>
-					<li class=""><a class="" href="about.html"> About</a></li>
-					<li class=""><a class="" href="service.html"> Services </a></li>
-					<li class=""><a class="" href="contact.html">Contact Us</a></li>
-					<li class=""><a class="" href="#">Sign Up</a></li>
+					<li class=""><a class="" href="/GoCheeta/common/about"> About</a></li>
+					<li class=""><a class="" href="/GoCheeta/common/services"> Services </a></li>
+					<li class=""><a class="" href="/GoCheeta/common/contact-us">Contact Us</a></li>
+					<li class=""><a class="" href="/GoCheeta/common/sign-up">Sign Up</a></li>
 				</ul>
 			</div>
 			<div class="info_social">

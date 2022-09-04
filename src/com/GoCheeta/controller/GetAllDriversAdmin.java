@@ -77,7 +77,7 @@ public class GetAllDriversAdmin extends HttpServlet {
 
 		int startCountBranch = (pagebranch * recordCountBranch) - recordCountBranch;
 
-		List<Branches> listBranches = branchesDAO.selectAllBranches(startCountBranch, recordCountBranch);
+		List<Branches> listBranches = branchesDAO.selectAllOnlineBranches(startCountBranch, recordCountBranch);
 		request.setAttribute("listBranches", listBranches);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/drivers/index.jsp");

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+if(session.getAttribute("driver_id") == null){	
+	response.sendRedirect("/GoCheeta/driver/sign-in");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,129 +37,12 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html"> <span
-					class="align-middle"><span
-						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px; font-size: x-large;">
-							GoCheeta <i class="fa-solid fa-taxi fa-xl"
-							style="color: #fffa00;"></i>
-					</span></span>
-				</a>
-
-				<ul class="sidebar-nav">
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-					</a></li>
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle" data-feather="send"></i>
-							<span class="align-middle">VIEW Bookings</span>
-					</a></li>
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle" data-feather="book"></i>
-							<span class="align-middle">My Bookings</span>
-					</a></li>
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle" data-feather=truck></i>
-							<span class="align-middle">My Vehicles</span>
-					</a></li>
-
-				</ul>
-
-			</div>
-		</nav>
+	
+		<jsp:include page="/views/driver/layouts/side-menu-bar.jsp" />
 
 		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle"> <i
-					class="hamburger align-self-center"></i>
-				</a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-
-						<li class="nav-item dropdown"><a
-							class="nav-icon dropdown-toggle" href="#" id="messagesDropdown"
-							data-bs-toggle="dropdown">
-								<div class="position-relative">
-									<i class="fa-solid fa-circle"
-										style="background-color: black; color: #00ff0a; padding: 2px; border-radius: 20px;"></i>
-								</div>
-						</a>
-							<div
-								class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
-								aria-labelledby="messagesDropdown">
-								<div class="dropdown-menu-header">
-									<div class="position-relative">STATUS</div>
-								</div>
-								<div class="list-group">
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="fa-solid fa-circle fa-2x"
-													style="background-color: black; color: #00ff0a; padding: 2px; border-radius: 20px;"></i>
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">ONLINE</div>
-											</div>
-										</div>
-									</a> <a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="fa-solid fa-moon fa-2x"
-													style="background: black; color: yellow; padding: 3px; border-radius: 20px;"></i>
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">IDLE</div>
-											</div>
-										</div>
-									</a> <a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="fa-solid fa-ban fa-2x"
-													style="background: #e91e63; padding: 3px; border-radius: 20px;"></i>
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">BUSY</div>
-											</div>
-										</div>
-									</a> <a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="fa-solid fa-circle fa-2x"
-													style="background-color: black; color: #9e9e9e; padding: 2px; border-radius: 20px;"></i>
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">OFFLINE</div>
-											</div>
-										</div>
-									</a>
-								</div>
-							</div></li>
-						<li class="nav-item dropdown"><a
-							class="nav-icon dropdown-toggle d-inline-block d-sm-none"
-							href="#" data-bs-toggle="dropdown"> <i class="align-middle"
-								data-feather="settings"></i>
-						</a> <a class="nav-link dropdown-toggle d-none d-sm-inline-block"
-							href="#" data-bs-toggle="dropdown"> <img
-								src="${initParam['basePath']}/assets/admin-kit/img/avatars/avatar.jpg"
-								class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span
-								class="text-dark">Charles Hall</span>
-						</a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i
-									class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
-							</div></li>
-					</ul>
-				</div>
-			</nav>
+			
+			<jsp:include page="/views/driver/layouts/nav-bar.jsp" />
 
 			<main class="content">
 			<div class="container-fluid p-0">
@@ -179,78 +68,40 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="vehicle" items="${listvehicles}">
 							<tr>
-								<td>VAN</td>
-								<td>50-8536</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
+							
+								<c:set var = "vehicleTypeID" value = "${vehicle.vehicle_types_vehicle_types_id}"/>
+								<c:set var = "vehicleTypeName" value = "${''}"/>
+								
+								<c:forEach var="vehicleType" items="${listvehicleTypes}">
+								<c:if test="${vehicleTypeID == vehicleType.vehicle_types_id}">
+								<c:set var = "vehicleTypeName" value = "${vehicleType.vehicle_type}"/>
+								</c:if>
+								</c:forEach>
+							
+								<td><c:out value="${vehicleTypeName}" /></td>
+								<td id="vehicleNumber<c:out value="${vehicle.vehicle_id}" />"><c:out value="${vehicle.vehicle_number}" /></td>
+								
+								<c:set var = "vehicleStatus" value = "${vehicle.vehicle_status}"/>
+								<c:if test="${vehicleStatus == 1}">
+								<td><span class="badge bg-success">ONLINE</span></td>
+								</c:if>
+								<c:if test="${vehicleStatus == 0}">
+								<td><span class="badge bg-danger">OFFLINE</span></td>
+								</c:if>
+								
+								<input id="vehicleType<c:out value="${vehicle.vehicle_id}" />" type="hidden"/ value="<c:out value="${vehicle.vehicle_types_vehicle_types_id}" />">
+								<input id="vehicleStatus<c:out value="${vehicle.vehicle_id}" />" type="hidden"/ value="<c:out value="${vehicle.vehicle_status}" />">
+								<input id="vehicleDriver<c:out value="${vehicle.vehicle_id}" />" type="hidden"/ value="<c:out value="${vehicle.drivers_driver_id}" />">
+								<input id="vehicleDescription<c:out value="${vehicle.vehicle_id}" />" type="hidden"/ value="<c:out value="${vehicle.vehicle_description}" />">
+								
+								<td><button id="vehicleEdit<c:out value="${vehicle.vehicle_id}" />" data-toggle="modal" data-target="#exampleModal"
+										data-whatever="<c:out value="${vehicle.vehicle_id}" />" class="btn btn-primary btn-sm">
 										<i class="fa-solid fa-pen-to-square"></i> EDIT
 									</button></td>
 							</tr>
-							<tr>
-								<td>VAN</td>
-								<td>50-8536</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>VAN</td>
-								<td>50-8536</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>VAN</td>
-								<td>50-8536</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>VAN</td>
-								<td>50-8536</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>VAN</td>
-								<td>50-8536</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>VAN</td>
-								<td>50-8536</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
-							<tr>
-								<td>VAN</td>
-								<td>50-8536</td>
-								<td><span class="badge bg-warning">On Going</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-pen-to-square"></i> EDIT
-									</button></td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 
@@ -271,44 +122,45 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form>
+									<form method="post" id="updateVehicles" action="/GoCheeta/driver/my-vehicles/update">
+									<input type="hidden" id="edit-vehicleID" name="edit-vehicleID"
+											value="">
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Vehicle
-												Type:</label> <select class="form-select mb-3">
-												<option selected>Select Type</option>
-												<option>VAN</option>
-												<option>CAR</option>
-												<option>SUV</option>
+												for="message-text" class="col-form-label">Vehicle Type:</label>
+											<select id="edit-vehicleType" name="edit-vehicleType" required="required" class="form-select mb-3">
+												<option selected value="">Select Vehicle Type</option>
+											<c:forEach var="vehicleType" items="${listvehicleTypes}">
+												<option value="<c:out value="${vehicleType.vehicle_types_id}" />"><c:out value="${vehicleType.vehicle_type}" /></option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Vehicle
-												No:</label> <input type="text" class="form-control"
-												placeholder="Input">
+												for="message-text" class="col-form-label">Vehicle Number:</label> 
+												<input id="edit-vehicleNumber" name="edit-vehicleNumber" required="required" type="text" class="form-control"
+												placeholder="ABC - 1236">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Vehicle
-												Status:</label>
-											<select class="form-select mb-3">
-												<option selected>Select STATUS</option>
-												<option>ONLINE</option>
-												<option>OFFLINE</option>
+												for="message-text" class="col-form-label">Vehicles Status:</label>
+											<select id="edit-vehicleStatus" name="edit-vehicleStatus" required="required" class="form-select mb-3">
+												<option selected value="">Select Status</option>
+												<option value="1">ONLINE</option>
+												<option value="0">OFFLINE</option>
 											</select>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Description:</label>
-											<textarea class="form-control" id="message-text"></textarea>
+												for="message-text" class="col-form-label">Vehicle Description:</label> 
+												<textarea class="form-control" name="edit-vehicleDescription" id="edit-vehicleDescription"></textarea>
 										</div>
 									</form>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Update</button>
+									<button form="updateVehicles" type="submit" class="btn btn-primary">Update</button>
 								</div>
 							</div>
 						</div>
@@ -332,44 +184,43 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form>
+									<form method="post" id="addVehicles" name="addVehicles" action="/GoCheeta/driver/my-vehicles/add-new">
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Vehicle
-												Type:</label> <select class="form-select mb-3">
-												<option selected>Select Type</option>
-												<option>VAN</option>
-												<option>CAR</option>
-												<option>SUV</option>
+												for="message-text" class="col-form-label">Vehicle Type:</label>
+											<select id="add-new-vehicleType" name="add-new-vehicleType" required="required" class="form-select mb-3">
+												<option selected value="">Select Vehicle Type</option>
+												<c:forEach var="vehicleType" items="${listvehicleTypes}">
+												<option value="<c:out value="${vehicleType.vehicle_types_id}" />"><c:out value="${vehicleType.vehicle_type}" /></option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Vehicle
-												No:</label> <input type="text" class="form-control"
-												placeholder="ABC - 8436">
+												for="message-text" class="col-form-label">Vehicle Number:</label> 
+												<input id="add-new-vehicleNumber" name="add-new-vehicleNumber" required="required" type="text" class="form-control"
+												placeholder="ABC - 1236">
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Vehicle
-												Status:</label>
-											<select class="form-select mb-3">
-												<option selected>Select Status</option>
-												<option>ONLINE</option>
-												<option>OFFLINE</option>
+												for="message-text" class="col-form-label">Vehicles Status:</label>
+											<select id="add-new-vehicleStatus" name="add-new-vehicleStatus" required="required" class="form-select mb-3">
+												<option selected value="">Select Status</option>
+												<option value="1">ONLINE</option>
+												<option value="0">OFFLINE</option>
 											</select>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Description:</label>
-											<textarea class="form-control" id="message-text"></textarea>
+												for="message-text" class="col-form-label">Vehicle Description:</label> 
+												<textarea class="form-control" name="add-new-vehicleDescription" id="add-new-vehicleDescription"></textarea>
 										</div>
 									</form>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">ADD</button>
+									<button form="addVehicles" type="submit" class="btn btn-primary">ADD</button>
 								</div>
 							</div>
 						</div>
@@ -378,15 +229,48 @@
 
 					<nav aria-label="Page navigation example" style="margin-top: 5%;">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
+
+							<%
+								double branchCount = Integer.parseInt(request.getAttribute("vehiclesCount").toString());
+								double recordForPage = 8;
+								double pageCount = Math.ceil(branchCount / recordForPage);
+								int curntPage = 1;
+
+								if (request.getParameter("page") != null) {
+									curntPage = Integer.parseInt(request.getParameter("page"));
+								} else {
+									curntPage = 1;
+								}
+								if (curntPage > 1) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/driver/my-vehicles?page=<%=curntPage - 1%>"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
+							<%
+								}
+								for (int i = 1; i <= pageCount; i++) {
+									if (curntPage == i) {
+							%>
+							<li class="page-item active"><a class="page-link"
+								href="/GoCheeta/driver/my-vehicles?page=<%=i%>"><%=i%></a></li>
+							<%
+								}else{
+									%>
+									<li class="page-item"><a class="page-link"
+								href="/GoCheeta/driver/my-vehicles?page=<%=i%>"><%=i%></a></li>
+									<%
+								}
+								}
+								if (curntPage < pageCount) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/driver/my-vehicles?page=<%=curntPage + 1%>"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
+							<%
+								}
+							%>
 						</ul>
 					</nav>
 
@@ -408,6 +292,7 @@
 				</div>
 			</footer>
 		</div>
+		
 	</div>
 
 	<script src="${initParam['basePath']}/assets/admin-kit/js/app.js"></script>
@@ -415,7 +300,36 @@
 		src="${initParam['basePath']}/assets/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/bootstrap.js"></script>
+		
+			<script>
+	if(performance.navigation.type == 2){
+		   location.reload(true);
+		}
+	</script>
+		
+	<script type="text/javascript">
+		$('#exampleModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget);
+			var recipient = button.data('whatever');
+			
+
+			var vehicle_number = $("#vehicleNumber" + recipient).text();
+			var vehicle_description = $("#vehicleDescription" + recipient).val();
+			var vehicle_status = $("#vehicleStatus" + recipient).val();
+			var vehicle_types_id = $("#vehicleType" + recipient).val();
+			var driver_id = $("#vehicleDriver" + recipient).val();
+
+			var modal = $(this);
+			modal.find('#edit-vehicleID').val(recipient);
+
+			modal.find('#edit-vehicleType').val(vehicle_types_id);
+			modal.find('#edit-vehicleNumber').val(vehicle_number);
+			//modal.find('#edit-vehicledDriver').val(driver_id);
+			modal.find('#edit-vehicleStatus').val(vehicle_status);
+			modal.find('#edit-vehicleDescription').val(vehicle_description);
+
+		})
+	</script>
 
 </body>
-
 </html>

@@ -1,3 +1,11 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<%
+String servletPath = request.getServletPath();
+//System.out.println(servletPath);
+%>
+
 <nav id="sidebar" class="sidebar js-sidebar">
 	<div class="sidebar-content js-simplebar">
 		<a class="sidebar-brand" href="/GoCheeta/admin/dashboard"> <span
@@ -9,32 +17,32 @@
 
 		<ul class="sidebar-nav">
 
-			<li class="sidebar-item active"><a class="sidebar-link"
+			<li class="sidebar-item <%if(servletPath.equals("/views/admin/dashboard/index.jsp")){ %>active<%}%>"><a class="sidebar-link"
 				href="/GoCheeta/admin/dashboard"> <i class="align-middle"
 					data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
 			</a></li>
 
-			<li class="sidebar-item active"><a class="sidebar-link"
+			<li class="sidebar-item <%if(servletPath.equals("/views/admin/branches/index.jsp")){ %>active<%}%>"><a class="sidebar-link"
 				href="/GoCheeta/admin/branches"> <i class="align-middle" data-feather=map-pin></i>
 					<span class="align-middle">Branches</span>
 			</a></li>
 
-			<li class="sidebar-item active"><a class="sidebar-link"
+			<li class="sidebar-item <%if(servletPath.equals("/views/admin/bookings/index.jsp")){ %>active<%}%>"><a class="sidebar-link"
 				href="/GoCheeta/admin/bookings"> <i class="align-middle" data-feather="book"></i>
 					<span class="align-middle">Bookings</span>
 			</a></li>
 
-			<li class="sidebar-item active"><a class="sidebar-link"
+			<li class="sidebar-item <%if(servletPath.equals("/views/admin/drivers/index.jsp")){ %>active<%}%>"><a class="sidebar-link"
 				href="/GoCheeta/admin/drivers"> <i class="align-middle" data-feather=users></i>
 					<span class="align-middle">Drivers</span>
 			</a></li>
 
-			<li class="sidebar-item active"><a class="sidebar-link"
+			<li class="sidebar-item <%if(servletPath.equals("/views/admin/vehicle-types/index.jsp")){ %>active<%}%>"><a class="sidebar-link"
 				href="/GoCheeta/admin/vehicle-types"> <i class="align-middle" data-feather=triangle></i>
 					<span class="align-middle">Vehicles Types</span>
 			</a></li>
 
-			<li class="sidebar-item active"><a class="sidebar-link"
+			<li class="sidebar-item <%if(servletPath.equals("/views/admin/vehicles/index.jsp")){ %>active<%}%>"><a class="sidebar-link"
 				href="/GoCheeta/admin/vehicles"> <i class="align-middle" data-feather=truck></i>
 					<span class="align-middle">Vehicles</span>
 			</a></li>
@@ -45,13 +53,13 @@
 			System.out.println(userRoleID);
 			if(userRoleID == 1){
 			%>
-			<li class="sidebar-item active"><a class="sidebar-link"
+			<li class="sidebar-item <%if(servletPath.equals("/views/admin/users/index.jsp")){ %>active<%}%>"><a class="sidebar-link"
 				href="/GoCheeta/admin/users"> <i class="align-middle" data-feather=award></i>
 					<span class="align-middle">Admin Users</span>
 			</a></li>
 			<%} }%>
 
-			<li class="sidebar-item active"><a class="sidebar-link"
+			<li class="sidebar-item <%if(servletPath.equals("/views/admin/reports/index.jsp")){ %>active<%}%>"><a class="sidebar-link"
 				href="/GoCheeta/admin/reports"> <i class="align-middle"
 					data-feather=bar-chart-2></i> <span class="align-middle">Reports</span>
 			</a></li>

@@ -4,35 +4,33 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GoCheeta | SIGN IN</title>
+<title>GoCheeta | SIGN UP</title>
 
 <!-- signIN/UP  CSS-->
 <link rel="stylesheet" type="text/css"
-	href="${initParam['basePath']}/assets/css/sign-in.css" />
+	href="${initParam['basePath']}/assets/css/register.css" />
+
+<!-- fontawsome stylesheet -->
+<script src="https://kit.fontawesome.com/57cb8f938d.js"
+	crossorigin="anonymous"></script>
 
 </head>
 <body>
 
 	<div class="popup">
-		<div class="popup-image">
-			<img
-				src="https://images.unsplash.com/photo-1536846511313-4b07b637bff9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-				alt="Login page image">
-		</div>
+
 		<form class="signinForm" onsubmit="return false" action="">
-			<h1 class="title">SIGN IN</h1>
-			<input type="text" name="userName" id="userName"placeholder="User Name" autocomplete="off" required="required"> 
-			<input type="password" name="password" id="password" placeholder="Password" required="required">
-			<button class="submit-btn">SIGN IN</button>
-			<hr>
-			<div class="options">
-				<div>
-					Don't have a account? <a class="link" href="">join</a>
-				</div>
-				<div>
-					Forgot your password? <a class="link" href="#">Reset</a>
-				</div>
-			</div>
+			<h1 class="title" style="text-align: center; margin-bottom: 50px;">SIGN
+				IN</h1>
+			<button class="submit-btn"
+				style="margin-left: 20%; margin-right: 20%; background: #00ffff;" onclick="location='/GoCheeta/sign-in'">
+				USER <i class="fa-solid fa-user-astronaut"
+					style="padding-left: 10px;"></i>
+			</button>
+			<button class="submit-btn"
+				style="margin-left: 20%; margin-right: 20%; background: #ffe000;" onclick="location='/GoCheeta/driver/sign-in'">
+				DRIVER <i class="fa-solid fa-id-card" style="padding-left: 10px;"></i>
+			</button>
 		</form>
 	</div>
 </body>

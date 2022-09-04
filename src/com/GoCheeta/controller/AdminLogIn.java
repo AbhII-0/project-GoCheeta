@@ -16,9 +16,6 @@ import com.GoCheeta.common.PW_DMD5_HASH;
 import com.GoCheeta.dao.Admin_UsersDAO;
 import com.GoCheeta.model.Admin_Users;
 
-/**
- * Servlet implementation class AdminLogIn
- */
 @WebServlet("/admin/signIn/")
 public class AdminLogIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -78,7 +75,7 @@ public class AdminLogIn extends HttpServlet {
 
 			// session.invalidate();
 
-			response.sendRedirect("/GoCheeta/admin/branches");
+			response.sendRedirect("/GoCheeta/admin/dashboard");
 		} else {
 			response.sendRedirect("/GoCheeta/admin/sign-in");
 		}

@@ -14,9 +14,9 @@ public class Admin_UsersDAO {
 
 	MasterData masterDataObj = new MasterData();
 
-	private final String GET_ADMIN_USER_BY_UNAME_PWORD = "SELECT * FROM admin_users WHERE (admin_user_name = ? ) AND (admin_user_password = ?) LIMIT 1;";
+	private final String GET_ADMIN_USER_BY_UNAME_PWORD = "SELECT * FROM admin_users WHERE (admin_user_name = ? ) AND (admin_user_password = ?) AND (admin_user_account_status = 1) LIMIT 1;";
 
-	private final String GET_ADMIN_USER_BY_ID = "SELECT * FROM admin_users WHERE admin_user_id = ? LIMIT 1;";
+	private final String GET_ADMIN_USER_BY_ID = "SELECT * FROM admin_users WHERE (admin_user_id = ?) AND (admin_user_account_status = 1) LIMIT 1;";
 
 	private final String ADD_ADMIN_USER = "INSERT INTO admin_users (admin_user_name, admin_user_email, admin_user_tp_number, admin_user_password, admin_user_account_status, user_roles_user_role_id, branches_branch_id) VALUES (?, ?, ?, ?, ?, ?, ?);";
 

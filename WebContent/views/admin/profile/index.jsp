@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+if(session.getAttribute("adminUserId") == null){	
+	response.sendRedirect("/GoCheeta/admin/sign-in");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,6 +74,11 @@
 	</main>
 
 	<script src="${initParam['basePath']}/assets/admin-kit/js/app.js"></script>
+	<script>
+	if(performance.navigation.type == 2){
+		   location.reload(true);
+		}
+	</script>
 
 </body>
 

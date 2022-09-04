@@ -21,6 +21,7 @@ public class Bookings {
 	protected String booking_cancel_reason;
 	protected int users_user_id;
 	protected int drivers_driver_id;
+	protected int vehicle_types_vehicle_types_id;
 	protected int vehicles_vehicle_id;
 	protected String user_name;
 	protected String user_tp_number;
@@ -28,6 +29,84 @@ public class Bookings {
 	protected String driver_tp_number;
 	protected String vehicle_number;
 	protected String vehicle_type;
+	protected double rev;
+	protected int mnth;
+
+	public Bookings(int booking_id, String booking_name, String booking_create_time, String booking_time,
+			String booking_start_location, String booking_start_location_cordinate, String booking_end_location,
+			String booking_endt_location_cordinate, double bookin_charge, int booking_driver_get_user,
+			String booking_driver_get_user_time, int booking_driver_drop_user, String booking_driver_drop_user_time,
+			String booking_user_status, String booking_driver_status, String booking_status,
+			String booking_cancel_reason, int users_user_id, int drivers_driver_id, int vehicle_types_vehicle_types_id,
+			int vehicles_vehicle_id, String user_name, String user_tp_number, String driver_user_name,
+			String driver_tp_number, String vehicle_number, String vehicle_type) {
+		super();
+		this.booking_id = booking_id;
+		this.booking_name = booking_name;
+		this.booking_create_time = booking_create_time;
+		this.booking_time = booking_time;
+		this.booking_start_location = booking_start_location;
+		this.booking_start_location_cordinate = booking_start_location_cordinate;
+		this.booking_end_location = booking_end_location;
+		this.booking_endt_location_cordinate = booking_endt_location_cordinate;
+		this.bookin_charge = bookin_charge;
+		this.booking_driver_get_user = booking_driver_get_user;
+		this.booking_driver_get_user_time = booking_driver_get_user_time;
+		this.booking_driver_drop_user = booking_driver_drop_user;
+		this.booking_driver_drop_user_time = booking_driver_drop_user_time;
+		this.booking_user_status = booking_user_status;
+		this.booking_driver_status = booking_driver_status;
+		this.booking_status = booking_status;
+		this.booking_cancel_reason = booking_cancel_reason;
+		this.users_user_id = users_user_id;
+		this.drivers_driver_id = drivers_driver_id;
+		this.vehicle_types_vehicle_types_id = vehicle_types_vehicle_types_id;
+		this.vehicles_vehicle_id = vehicles_vehicle_id;
+		this.user_name = user_name;
+		this.user_tp_number = user_tp_number;
+		this.driver_user_name = driver_user_name;
+		this.driver_tp_number = driver_tp_number;
+		this.vehicle_number = vehicle_number;
+		this.vehicle_type = vehicle_type;
+	}
+
+	public Bookings(double rev, int mnth) {
+		super();
+		this.rev = rev;
+		this.mnth = mnth;
+	}
+
+	public Bookings(int booking_id, String booking_name, String booking_create_time, String booking_time,
+			String booking_start_location, String booking_start_location_cordinate, String booking_end_location,
+			String booking_endt_location_cordinate, double bookin_charge, int booking_driver_get_user,
+			String booking_driver_get_user_time, int booking_driver_drop_user, String booking_driver_drop_user_time,
+			String booking_user_status, String booking_driver_status, String booking_status,
+			String booking_cancel_reason, int users_user_id, int drivers_driver_id, int vehicle_types_vehicle_types_id,
+			int vehicles_vehicle_id, String vehicle_type) {
+		super();
+		this.booking_id = booking_id;
+		this.booking_name = booking_name;
+		this.booking_create_time = booking_create_time;
+		this.booking_time = booking_time;
+		this.booking_start_location = booking_start_location;
+		this.booking_start_location_cordinate = booking_start_location_cordinate;
+		this.booking_end_location = booking_end_location;
+		this.booking_endt_location_cordinate = booking_endt_location_cordinate;
+		this.bookin_charge = bookin_charge;
+		this.booking_driver_get_user = booking_driver_get_user;
+		this.booking_driver_get_user_time = booking_driver_get_user_time;
+		this.booking_driver_drop_user = booking_driver_drop_user;
+		this.booking_driver_drop_user_time = booking_driver_drop_user_time;
+		this.booking_user_status = booking_user_status;
+		this.booking_driver_status = booking_driver_status;
+		this.booking_status = booking_status;
+		this.booking_cancel_reason = booking_cancel_reason;
+		this.users_user_id = users_user_id;
+		this.drivers_driver_id = drivers_driver_id;
+		this.vehicle_types_vehicle_types_id = vehicle_types_vehicle_types_id;
+		this.vehicles_vehicle_id = vehicles_vehicle_id;
+		this.vehicle_type = vehicle_type;
+	}
 
 	public Bookings(int booking_id, String booking_name, String booking_create_time, String booking_time,
 			String booking_start_location, String booking_start_location_cordinate, String booking_end_location,
@@ -93,6 +172,90 @@ public class Bookings {
 		this.driver_tp_number = driver_tp_number;
 		this.vehicle_number = vehicle_number;
 		this.vehicle_type = vehicle_type;
+	}
+
+	public Bookings(int booking_id, String booking_name, String booking_create_time, String booking_time,
+			String booking_start_location, String booking_start_location_cordinate, String booking_end_location,
+			String booking_endt_location_cordinate, double bookin_charge, int booking_driver_get_user,
+			String booking_driver_get_user_time, int booking_driver_drop_user, String booking_driver_drop_user_time,
+			String booking_user_status, String booking_driver_status, String booking_status,
+			String booking_cancel_reason, int users_user_id, int drivers_driver_id, int vehicles_vehicle_id,
+			String user_name, String user_tp_number, int vehicle_types_vehicle_types_id) {
+		super();
+
+		this.booking_id = booking_id;
+		this.booking_name = booking_name;
+		this.booking_create_time = booking_create_time;
+		this.booking_time = booking_time;
+		this.booking_start_location = booking_start_location;
+		this.booking_start_location_cordinate = booking_start_location_cordinate;
+		this.booking_end_location = booking_end_location;
+		this.booking_endt_location_cordinate = booking_endt_location_cordinate;
+		this.bookin_charge = bookin_charge;
+		this.booking_driver_get_user = booking_driver_get_user;
+		this.booking_driver_get_user_time = booking_driver_get_user_time;
+		this.booking_driver_drop_user = booking_driver_drop_user;
+		this.booking_driver_drop_user_time = booking_driver_drop_user_time;
+		this.booking_user_status = booking_user_status;
+		this.booking_driver_status = booking_driver_status;
+		this.booking_status = booking_status;
+		this.booking_cancel_reason = booking_cancel_reason;
+		this.users_user_id = users_user_id;
+		this.drivers_driver_id = drivers_driver_id;
+		this.vehicles_vehicle_id = vehicles_vehicle_id;
+		this.vehicle_types_vehicle_types_id = vehicle_types_vehicle_types_id;
+	}
+
+	public Bookings(int booking_id, String booking_name, String booking_create_time, String booking_time,
+			String booking_start_location, String booking_start_location_cordinate, String booking_end_location,
+			String booking_endt_location_cordinate, double bookin_charge, int booking_driver_get_user,
+			String booking_driver_get_user_time, int booking_driver_drop_user, String booking_driver_drop_user_time,
+			String booking_user_status, String booking_driver_status, String booking_status,
+			String booking_cancel_reason, int users_user_id, int drivers_driver_id, int vehicle_types_vehicle_types_id,
+			int vehicles_vehicle_id) {
+		super();
+		this.booking_id = booking_id;
+		this.booking_name = booking_name;
+		this.booking_create_time = booking_create_time;
+		this.booking_time = booking_time;
+		this.booking_start_location = booking_start_location;
+		this.booking_start_location_cordinate = booking_start_location_cordinate;
+		this.booking_end_location = booking_end_location;
+		this.booking_endt_location_cordinate = booking_endt_location_cordinate;
+		this.bookin_charge = bookin_charge;
+		this.booking_driver_get_user = booking_driver_get_user;
+		this.booking_driver_get_user_time = booking_driver_get_user_time;
+		this.booking_driver_drop_user = booking_driver_drop_user;
+		this.booking_driver_drop_user_time = booking_driver_drop_user_time;
+		this.booking_user_status = booking_user_status;
+		this.booking_driver_status = booking_driver_status;
+		this.booking_status = booking_status;
+		this.booking_cancel_reason = booking_cancel_reason;
+		this.users_user_id = users_user_id;
+		this.drivers_driver_id = drivers_driver_id;
+		this.vehicle_types_vehicle_types_id = vehicle_types_vehicle_types_id;
+		this.vehicles_vehicle_id = vehicles_vehicle_id;
+	}
+
+	public Bookings(String booking_name, String booking_start_location, String booking_start_location_cordinate,
+			String booking_end_location, String booking_endt_location_cordinate, double bookin_charge,
+			String booking_status, int users_user_id, int vehicle_types_vehicle_types_id) {
+		super();
+		this.booking_name = booking_name;
+		this.booking_start_location = booking_start_location;
+		this.booking_start_location_cordinate = booking_start_location_cordinate;
+		this.booking_end_location = booking_end_location;
+		this.booking_endt_location_cordinate = booking_endt_location_cordinate;
+		this.bookin_charge = bookin_charge;
+		this.booking_status = booking_status;
+		this.users_user_id = users_user_id;
+		this.vehicle_types_vehicle_types_id = vehicle_types_vehicle_types_id;
+	}
+
+	public Bookings(int booking_id, String booking_cancel_reason) {
+		super();
+		this.booking_id = booking_id;
+		this.booking_cancel_reason = booking_cancel_reason;
 	}
 
 	public int getBooking_id() {
@@ -301,6 +464,38 @@ public class Bookings {
 
 	public void setVehicle_type(String vehicle_type) {
 		this.vehicle_type = vehicle_type;
+	}
+
+	public int getvehicle_types_vehicle_types_id() {
+		return vehicle_types_vehicle_types_id;
+	}
+
+	public void setvehicle_types_vehicle_types_id(int vehicle_types_vehicle_types_id) {
+		this.vehicle_types_vehicle_types_id = vehicle_types_vehicle_types_id;
+	}
+
+	public int getVehicle_types_vehicle_types_id() {
+		return vehicle_types_vehicle_types_id;
+	}
+
+	public void setVehicle_types_vehicle_types_id(int vehicle_types_vehicle_types_id) {
+		this.vehicle_types_vehicle_types_id = vehicle_types_vehicle_types_id;
+	}
+
+	public double getRev() {
+		return rev;
+	}
+
+	public void setRev(double rev) {
+		this.rev = rev;
+	}
+
+	public int getMnth() {
+		return mnth;
+	}
+
+	public void setMnth(int mnth) {
+		this.mnth = mnth;
 	}
 
 }

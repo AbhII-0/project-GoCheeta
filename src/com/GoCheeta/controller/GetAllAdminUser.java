@@ -71,7 +71,7 @@ public class GetAllAdminUser extends HttpServlet {
 		int adminUsersCount = admin_UsersDAO.selectAdminUsersCount();
 		request.setAttribute("adminUsersCount", adminUsersCount);
 
-		List<Branches> listBranches = branchesDAO.selectAllBranches(0, 100);
+		List<Branches> listBranches = branchesDAO.selectAllOnlineBranches(0, 100);
 		request.setAttribute("listBranches", listBranches);
 
 		List<User_Roles> user_Roles = user_RolesDAO.selectAllUserRoles();

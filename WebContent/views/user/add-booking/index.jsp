@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+
+if(session.getAttribute("userId") == null){	
+	response.sendRedirect("/GoCheeta/sign-in");
+}
+
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+
+%>
 <!DOCTYPE html>
 <html>
 
@@ -68,43 +81,7 @@
 
 	<div class="hero_area">
 		<!-- header section strats -->
-		<header class="header_section">
-			<div class="container-fluid">
-				<nav class="navbar navbar-expand-lg custom_nav-container ">
-					<a class="navbar-brand" href="index.html"> <span
-						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px;">
-							GoCheeta <i class="fa-solid fa-taxi fa-xl"
-							style="color: #fffa00;"></i>
-					</span>
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<div
-							class="d-flex ml-auto flex-column flex-lg-row align-items-center">
-							<ul class="navbar-nav  ">
-								<li class="nav-item active"><a class="nav-link"
-									href="index.html"><i class="fa-regular fa-square-plus"></i>
-										ADD A BOOKING <span class="sr-only">(current)</span></a></li>
-								<li class="nav-item"><a class="nav-link" href="about.html"><i
-										class="fa-solid fa-clock-rotate-left"></i> MY BOOKINGS</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="contact.html"><i class="fa-solid fa-headset"></i>
-										Contact Us</a></li>
-								<li class="nav-item"><a class="nav-link" href="#"><i
-										class="fa-solid fa-user-astronaut"></i> ACCOUNT</a></li>
-								<li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT</a></li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</header>
+		<jsp:include page="/views/user/layouts/nav-bar.jsp" />
 		<!-- end header section -->
 
 		<!-- Add Booking -->
@@ -115,44 +92,46 @@
 				<div id="svg_wrap"></div>
 
 				<h1 style="font-weight: bold; text-align: center;">ADD BOOKING</h1>
-				<form action="test.html">
+				<form method="post" action="/GoCheeta/add-booking/place">
 					<section id="add-booking-section-01" class="add-booking-section" style="width: 50%;">
 						<p style="text-align: start; font-weight: bold;">SELECT
 							VEHICLE TYPE</p>
-						<select id="vehicle-type" required="required" class="add-booking-input">
+						<select id="vehicle-type" name="booking-vehicle-type" required="required" class="add-booking-input">
 							<option class="select-options" value="" disabled="disabled"
 								selected="selected">SELECT VEHICLE TYPE</option>
-							<option value="BIKE">BIKE</option>
-							<option value="CAR">CAR</option>
-							<option value="SUV">SUV</option>
-							<option value="VAN">VAN</option>
-							<option value="LORRY">LORRY</option>
+							<c:forEach var="vehicleType" items="${listvehicleTypes}">
+							<option value="<c:out value="${vehicleType.vehicle_types_id}" />"><c:out value="${vehicleType.vehicle_type}" /></option>
+							</c:forEach>
 						</select>
+						<c:forEach var="vehicleType" items="${listvehicleTypes}">
+							<input id="vehicleTypeCharge<c:out value="${vehicleType.vehicle_types_id}" />" type="hidden" value="<c:out value="${vehicleType.vehicle_type_price}" />">
+							</c:forEach>
 						<p
 							style="text-align: start; font-weight: bold; margin-top: inherit;">SELECT
 							CITY</p>
-						<select id="travel-city" required="required" class="add-booking-input">
+						<select id="travel-city" name="booking-City" required="required" class="add-booking-input">
 							<option value="" disabled="disabled" selected="selected">SELECT
 								CITY</option>
-							<option value="KANDY">KANDY</option>
-							<option value="GALLE">GALLE</option>
-							<option value="COLOMBO">COLOMBO</option>
+							<c:forEach var="branch" items="${listBranches}">
+							<option value="<c:out value="${branch.branch_id}" />"><c:out value="${branch.branch_loaction}" /></option>
+							</c:forEach>
 						</select>
-						<!--<input type="text" placeholder="Firstname" /> <input type="text"
-						placeholder="Surname" /> <input type="text"
-						placeholder="Birthdate" /> <input type="text"
-						placeholder="Insurance number" /> <input type="text"
-						placeholder="Family status" />-->
+						<c:forEach var="branch" items="${listBranches}">
+						<input id="brancheName<c:out value="${branch.branch_id}" />" type="hidden" value="<c:out value="${branch.branch_loaction}" />">
+							<input id="brancheCordinate<c:out value="${branch.branch_id}" />" type="hidden" value="<c:out value="${branch.brancheCordinate}" />">
+							</c:forEach>
+						<input type="hidden" id="selectCityLat">
+						<input type="hidden" id="selectCityLng">
 					</section>
 
 					<section id="add-booking-section-02" style="width: 85%;" class="add-booking-section">
 						<p style="text-align: start; font-weight: bold;">PICK UP
 							LOACTION</p>
 						<div class="autocomplete" style="width: 100%;">
-							<input id="pickUpLocation" required="required" type="text"
+							<input id="pickUpLocation" name="booking-pickUpLocation" required="required" type="text"
 								placeholder="TYPE & SELECT YOUR PICK UP LOACTION" />
 							<input id="pickUpLocationCity" type="hidden" value=""/>
-							<input id="pickUpLocationCoordinates" type="hidden" value=""/>
+							<input id="pickUpLocationCoordinates" name="booking-pickUpLocationCoordinates" type="hidden" value=""/>
 						</div>
 						<div id="pickUpLocationMap" class="location-map"></div>
 					</section>
@@ -160,9 +139,9 @@
 					<section id="add-booking-section-03" style="width: 85%;" class="add-booking-section">
 						<p style="text-align: start; font-weight: bold;">DROP LOACTION</p>
 						<div class="autocomplete" style="width: 100%;">
-						<input id="dropLocation" required="required" type="text" placeholder="TYPE & SELECT YOUR DROP LOACTION" />
+						<input id="dropLocation" name="booking-dropLocation" required="required" type="text" placeholder="TYPE & SELECT YOUR DROP LOACTION" />
 						<input id="dropLocationCity" type="hidden" value=""/>
-						<input id="dropLocationCoordinates" type="hidden" value=""/>
+						<input id="dropLocationCoordinates" name="booking-dropLocationCoordinates" type="hidden" value=""/>
 						</div>
 
 						<div id="dropLocationMap" class="location-map"></div>
@@ -170,11 +149,13 @@
 
 					<section id="add-booking-section-04" style="width: 85%;" class="add-booking-section">
 						<p style="text-align: start; font-weight: bold;">CHARGE</p>
-						<input id="bookingPrice" type="text" disabled="disabled" value="RS 2500.00" />
+						<input id="bookingPrice" name="booking-bookingPrice" type="text" disabled="disabled" />
+						<input id="bookingCharge" name="booking-bookingCharge" type="hidden"/>
 
 						<p
 							style="text-align: start; font-weight: bold; margin-top: inherit;">DISTANCE</p>
-						<input id="bookingDis" type="text" disabled="disabled" value="" />
+						<input id="bookingDis" name="booking-bookingDis" type="text" disabled="disabled"/>
+						<input id="bookingDistance" name="booking-bookingDistance" type="hidden"/>
 
 						<div id="disMap" class="location-map"></div>
 					</section>
@@ -201,11 +182,16 @@
 	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/bootstrap.js"></script>
 	<script type="text/javascript"
-		src="${initParam['basePath']}/assets/js/add-booking.js"></script>
-	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/map.js"></script>
 	<script type="text/javascript"
+		src="${initParam['basePath']}/assets/js/add-booking.js"></script>
+	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+	<script>
+	if(performance.navigation.type == 2){
+		   location.reload(true);
+		}
+	</script>
 
 
 </body>

@@ -14,4 +14,4 @@ INSERT INTO `vehicles` VALUES (1,'ABC - 8746','Blue Car, With Comfroble Seat',1,
 
 INSERT INTO `users` VALUES (1,'user01','user01@qa.com','0714567890','/assets/images/user-img.png','81DC9BDB52D04DC20036DBD8313ED055','2022-08-25 00:19:40',1,1);
 
-INSERT INTO `bookings` VALUES (1,'The Grand Kandyan Hotel to Amaya Hills Kandy','2022-08-31 08:28:58','2022-08-31 13:58:03','The Grand Kandyan Hotel','7.307963432173111,80.64479230178556','Amaya Hills Kandy','7.26325233078059,80.62657075752196',1000,0,NULL,0,NULL,'ON TIME','ON TIME','PENDING',NULL,1,1,1);
+INSERT INTO `bookings` VALUES (1,'The Grand Kandyan Hotel to Amaya Hills Kandy','2022-08-31 08:28:58','2022-08-31 13:58:03','The Grand Kandyan Hotel','7.307963432173111,80.64479230178556','Amaya Hills Kandy','7.26325233078059,80.62657075752196',1000,0,NULL,0,NULL,'ON TIME','ON TIME','PENDING',NULL,1,1,1,1);

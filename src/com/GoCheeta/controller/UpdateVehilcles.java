@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.GoCheeta.dao.VehiclesDAO;
 import com.GoCheeta.model.Vehicles;
 
-/**
- * Servlet implementation class UpdateVehilcles
- */
 @WebServlet("/admin/vehicles/update")
 public class UpdateVehilcles extends HttpServlet {
 	private static final long serialVersionUID = 1L;

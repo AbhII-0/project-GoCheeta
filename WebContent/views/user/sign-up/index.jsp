@@ -22,7 +22,7 @@
 	<h4 id="issue-alert" class="issue-alert-none">Please Check All Fields Corectly...!</h4>
 	</div>
 	<div class="popup" style="height: auto;">
-		<form class="signinForm" action="${initParam['basePath']}/views/user/menu">
+		<form class="signinForm" method="post" action="/GoCheeta/user/signUp">
 			<h1 class="title" style="text-align: center; margin-bottom: 10px;">SIGN
 				UP</h1>
 

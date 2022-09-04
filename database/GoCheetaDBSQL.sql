@@ -283,15 +283,17 @@ CREATE TABLE IF NOT EXISTS `GoCheetaDB`.`bookings` (
   `booking_driver_drop_user_time` DATETIME NULL,
   `booking_user_status` ENUM('ON TIME', 'LATE', 'CANCEL') NOT NULL DEFAULT 'ON TIME',
   `booking_driver_status` ENUM('ON TIME', 'LATE', 'CANCEL') NOT NULL DEFAULT 'ON TIME',
-  `booking_status` ENUM('DRIVER CANCEL', 'USER CANCEL', 'COMPLETE', 'ONGOING', 'PENDING') NOT NULL,
+  `booking_status` ENUM('DRIVER CANCEL', 'USER CANCEL', 'COMPLETE', 'ONGOING', 'PENDING') NOT NULL DEFAULT 'PENDING',
   `booking_cancel_reason` VARCHAR(255) NULL,
   `users_user_id` INT NOT NULL,
-  `drivers_driver_id` INT NOT NULL,
-  `vehicles_vehicle_id` INT NOT NULL,
+  `drivers_driver_id` INT NULL,
+  `vehicles_vehicle_id` INT NULL,
+  `vehicle_types_vehicle_types_id` INT(3) NOT NULL,
   PRIMARY KEY (`booking_id`),
   INDEX `fk_bookings_users1_idx` (`users_user_id` ASC) ,
   INDEX `fk_bookings_drivers1_idx` (`drivers_driver_id` ASC) ,
   INDEX `fk_bookings_vehicles1_idx` (`vehicles_vehicle_id` ASC) ,
+  INDEX `fk_bookings_vehicle_types1_idx` (`vehicle_types_vehicle_types_id` ASC) ,
   CONSTRAINT `fk_bookings_users1`
     FOREIGN KEY (`users_user_id`)
     REFERENCES `GoCheetaDB`.`users` (`user_id`)
@@ -305,6 +307,11 @@ CREATE TABLE IF NOT EXISTS `GoCheetaDB`.`bookings` (
   CONSTRAINT `fk_bookings_vehicles1`
     FOREIGN KEY (`vehicles_vehicle_id`)
     REFERENCES `GoCheetaDB`.`vehicles` (`vehicle_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bookings_vehicle_types1`
+    FOREIGN KEY (`vehicle_types_vehicle_types_id`)
+    REFERENCES `GoCheetaDB`.`vehicle_types` (`vehicle_types_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 

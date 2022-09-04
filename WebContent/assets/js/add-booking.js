@@ -3,6 +3,13 @@ $(document)
 				function() {
 					var base_color = "rgb(230,230,230)";
 					var active_color = "rgb(237, 40, 70)";
+					
+					var selectVehicleTypePrice = 0;
+					var selectCityName = null;
+					var selectCityCordinate = null;
+					
+					var selectCityLat = null;
+					var selectCityLng = null;
 
 					var child = 1;
 					var runNextFun = false;
@@ -201,6 +208,15 @@ $(document)
 										}
 
 									});
+					
+					$("#travel-city").on('change', function() {
+						  $("#pickUpLocation").val("");
+						  $("#pickUpLocationCity").val("");
+						  $("#pickUpLocationCoordinates").val("");
+						  $("#dropLocation").val("");
+						  $("#dropLocationCity").val("");
+						  $("#dropLocationCoordinates").val("");
+					});
 
 					function checkInputFields(btn) {
 						btn
@@ -220,7 +236,35 @@ $(document)
 //										console.log(travelCity);
 										if ((vehicleType != null)
 												&& (travelCity != null)) {
+											
+											selectVehicleTypePrice = $('#vehicleTypeCharge'+vehicleType).val();
+											selectCityName = $("#brancheName"+travelCity).val();
+											selectCityCordinate = $('#brancheCordinate'+travelCity).val();
+											
+											const splitArray = selectCityCordinate.trim().split(",");
+											
+											selectCityLat = splitArray[0];
+											selectCityLng = splitArray[1];
+											
+											$("#selectCityLat").val(selectCityLat);
+											$("#selectCityLng").val(selectCityLng);
+											
+											var newCenterOfMap = {lat: selectCityLat, lng: selectCityLng};
+										    
+											pickUpLocationMap.setCenter(newCenterOfMap);
+											pickUpLocationMap.setZoom(11);
+											dropLocationMap.setCenter(newCenterOfMap);
+											dropLocationMap.setZoom(11);
+											
+//											console.log(selectCityLat);
+//											console.log(selectCityLng);
+											
+//											console.log(selectVehicleTypePrice);
+//											console.log(selectCityName);
+//											console.log(selectCityCordinate);
+											
 											runNextFun = true;
+											
 										} else {
 											alert("Fill All Fields...!");
 											runNextFun = false;

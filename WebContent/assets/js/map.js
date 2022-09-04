@@ -2,7 +2,6 @@ var platform = new H.service.Platform({
 	    apikey: "YTAWUS1lgkY8BVl63vM5ipT3V4vecBnwC1_EHk3DNvs"
 	  });
 	var defaultLayers = platform.createDefaultLayers();
-
 	var pickUpLocationMap = new H.Map(document.getElementById('pickUpLocationMap'), defaultLayers.vector.normal.map, {
 	    center: {lat: 7.289946585454237, lng: 80.63505034705457},
 	    zoom: 11,
@@ -117,7 +116,10 @@ var platform = new H.service.Platform({
 			        						
 			        						var locationCity = getLocationCity(locationLat, locationLng, null);
 			        						
-			        						if(city == locationCity){
+			        						var travelCity = $("#travel-city").val();
+			        						var selectCityName = $("#brancheName"+travelCity).val();
+			        						
+			        						if(selectCityName.toLocaleUpperCase() == locationCity.toLocaleUpperCase()){
 			        							
 			        							$("#"+inpID+"City").val(locationCity);
 			        							$("#"+inpID+"Coordinates").val(locationLat+","+locationLng);
@@ -136,7 +138,7 @@ var platform = new H.service.Platform({
 			        								addMarkersToMap(dropLocationMap, locationLat, locationLng);
 			        							}
 			        						}else{
-			        							alert("Soory Your Location Out Of "+city+"...!"+locationCity);
+			        							alert("Soory Your Location Out Of "+selectCityName+"...! You Selected Location's City : "+locationCity);
 			        						}
 			        						
 
@@ -169,8 +171,12 @@ var platform = new H.service.Platform({
 			});
 	}
 	
-	getLocationsList($("#pickUpLocation"), null, null, null, "Kandy");
-	getLocationsList($("#dropLocation"), null, null, null, "Kandy");
+
+//	console.log($("#travel-city").val());
+//	selectCityName = selectCityName.toLocaleUpperCase();
+	
+	getLocationsList($("#pickUpLocation"), null, null, null, null);
+	getLocationsList($("#dropLocation"), null, null, null, null);
 	
 	function getLocationCity(locationLat, locationLng, apiKey) {
 		
@@ -374,8 +380,16 @@ var platform = new H.service.Platform({
 //					  console.log(distance);
 //					  console.log(duration);
 					  
+					  var vehicleType = $("#vehicle-type").val();
+					  var selectVehicleTypePrice = $('#vehicleTypeCharge'+vehicleType).val();
+					  
+					  console.log(selectVehicleTypePrice);
+					  
 					  $("#bookingDis").val((distance/1000)+"km");
-					  $("#bookingPrice").val("RS "+(distance*60)/1000);
+					  $("#bookingPrice").val("RS "+(distance*selectVehicleTypePrice)/1000);
+					  
+					  $("#bookingDistance").val((distance/1000));
+					  $("#bookingCharge").val((distance*selectVehicleTypePrice)/1000);
 				}
 
 				calculateRouteFromAtoB(platform);

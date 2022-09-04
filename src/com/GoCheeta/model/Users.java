@@ -11,6 +11,16 @@ public class Users {
 	protected int user_account_status;
 	protected int user_account_verification;
 
+	public Users(String user_name, String user_email, String user_tp_number, String userProfilePic,
+			String user_password) {
+		super();
+		this.user_name = user_name;
+		this.user_email = user_email;
+		this.user_tp_number = user_tp_number;
+		this.userProfilePic = userProfilePic;
+		this.user_password = user_password;
+	}
+
 	public Users(int user_id, String user_name, String user_email, String user_tp_number, String userProfilePic,
 			String user_password, int user_account_status, int user_account_verification) {
 		super();
@@ -22,6 +32,29 @@ public class Users {
 		this.user_password = user_password;
 		this.user_account_status = user_account_status;
 		this.user_account_verification = user_account_verification;
+	}
+
+	public Users(int user_id, String user_name, String user_email, String user_tp_number, String userProfilePic,
+			int user_account_status, int user_account_verification) {
+		super();
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.user_email = user_email;
+		this.user_tp_number = user_tp_number;
+		this.userProfilePic = userProfilePic;
+		this.user_account_status = user_account_status;
+		this.user_account_verification = user_account_verification;
+	}
+
+	public Users(String user_name, String user_password) {
+		super();
+		this.user_name = user_name;
+		this.user_password = user_password;
+	}
+
+	public Users(int user_id) {
+		super();
+		this.user_id = user_id;
 	}
 
 	public int getUser_id() {

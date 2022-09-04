@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +24,7 @@
 	<h4 id="issue-alert" class="issue-alert-none">Please Check All Fields Corectly...!</h4>
 	</div>
 	<div class="popup" style="height: auto;">
-		<form class="signinForm" onsubmit="return false" action="">
+		<form class="signinForm" method="post" action="/GoCheeta/driver/signUp">
 			<h1 class="title" style="text-align: center;">SIGN
 				UP</h1>
 
@@ -49,13 +50,13 @@
 			<input class="required" type="email" name="email" id="email" placeholder="E-Mail"
 				autocomplete="off" required="required"> <input class="required" type="number"
 				name="tp" id="tp" placeholder="Mobile Number" autocomplete="off"
-				required="required" min="0"> <select class="branch-select required"
+				required="required" min="0"> <select name="driverBranch" class="branch-select required"
 				required>
 				<option class="select-options" value="" disabled="disabled" selected="selected">SELECT
 					BRANCH</option>
-				<option class="select-options" value="KANDY">KANDY</option>
-				<option class="select-options" value="GALLE">GALLE</option>
-				<option class="select-options" value="COLOMBO">COLOMBO</option>
+				<c:forEach var="branch" items="${listBranches}">
+												<option value="<c:out value="${branch.branch_id}" />"><c:out value="${branch.branch_loaction}" /></option>
+												</c:forEach>
 			</select> <input class="required" type="password" name="password" id="password"
 				placeholder="Password" required="required">
 			<div id="pBar" style="margin-left: 3%; margin-right: 3%;">
@@ -77,7 +78,7 @@
 			<hr>
 			<div class="options">
 				<div>
-					Do you have a account? <a class="link" href="">SIGN IN</a>
+					Do you have a account? <a class="link" onclick="location='/GoCheeta/driver/sign-in'" >SIGN IN</a>
 				</div>
 			</div>
 		</form>
@@ -88,5 +89,10 @@
 		src="${initParam['basePath']}/assets/js/image-upload.js"></script>
 	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/scrollbar.js"></script>
+	<script>
+	if(performance.navigation.type == 2){
+		   location.reload(true);
+		}
+	</script>
 </body>
 </html>

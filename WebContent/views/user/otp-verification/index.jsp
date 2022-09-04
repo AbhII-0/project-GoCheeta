@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,13 +16,14 @@
 	crossorigin="anonymous"></script>
 <body>
 		<div class="popup" style="height: auto;">
-			<form class="signinForm" onsubmit="return false" action="">
+			<form class="signinForm" method="post" action="/GoCheeta/user/signUp/acc-verify">
 				<h1 class="title" style="text-align: center; margin-bottom: 10px;">SIGN
 					UP</h1>
 				<h3
 					style="margin-bottom: 20px; text-align: center; text-size-adjust: auto;">
-					OTP code send to this mail. : <span style="color: #ffeb3b;">user1234@gmail.com</span>
+					OTP code send to this mail. : <span style="color: #ffeb3b;"><c:out value="${user_email}" /></span>
 				</h3>
+				<input type="hidden" name="user_email" value="<c:out value="${user_email}" />">
 				<div>
 					<input type="number" class="otp-no" name="otpNo1" id="otpNo1"
 						placeholder="" autocomplete="off" required="required" min="0"

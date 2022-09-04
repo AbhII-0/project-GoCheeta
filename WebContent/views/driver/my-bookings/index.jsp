@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+if(session.getAttribute("driver_id") == null){	
+	response.sendRedirect("/GoCheeta/driver/sign-in");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,129 +37,14 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html"> <span
-					class="align-middle"><span
-						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px; font-size: x-large;">
-							GoCheeta <i class="fa-solid fa-taxi fa-xl"
-							style="color: #fffa00;"></i>
-					</span></span>
-				</a>
+		
 
-				<ul class="sidebar-nav">
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle"
-							data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-					</a></li>
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle" data-feather="send"></i>
-							<span class="align-middle">VIEW Bookings</span>
-					</a></li>
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle" data-feather="book"></i>
-							<span class="align-middle">My Bookings</span>
-					</a></li>
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="index.html"> <i class="align-middle" data-feather=truck></i>
-							<span class="align-middle">My Vehicles</span>
-					</a></li>
-
-				</ul>
-
-			</div>
-		</nav>
+		<jsp:include page="/views/driver/layouts/side-menu-bar.jsp" />
 
 		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle"> <i
-					class="hamburger align-self-center"></i>
-				</a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-
-						<li class="nav-item dropdown"><a
-							class="nav-icon dropdown-toggle" href="#" id="messagesDropdown"
-							data-bs-toggle="dropdown">
-								<div class="position-relative">
-									<i class="fa-solid fa-circle"
-										style="background-color: black; color: #00ff0a; padding: 2px; border-radius: 20px;"></i>
-								</div>
-						</a>
-							<div
-								class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
-								aria-labelledby="messagesDropdown">
-								<div class="dropdown-menu-header">
-									<div class="position-relative">STATUS</div>
-								</div>
-								<div class="list-group">
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="fa-solid fa-circle fa-2x"
-													style="background-color: black; color: #00ff0a; padding: 2px; border-radius: 20px;"></i>
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">ONLINE</div>
-											</div>
-										</div>
-									</a> <a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="fa-solid fa-moon fa-2x"
-													style="background: black; color: yellow; padding: 3px; border-radius: 20px;"></i>
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">IDLE</div>
-											</div>
-										</div>
-									</a> <a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="fa-solid fa-ban fa-2x"
-													style="background: #e91e63; padding: 3px; border-radius: 20px;"></i>
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">BUSY</div>
-											</div>
-										</div>
-									</a> <a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="fa-solid fa-circle fa-2x"
-													style="background-color: black; color: #9e9e9e; padding: 2px; border-radius: 20px;"></i>
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">OFFLINE</div>
-											</div>
-										</div>
-									</a>
-								</div>
-							</div></li>
-						<li class="nav-item dropdown"><a
-							class="nav-icon dropdown-toggle d-inline-block d-sm-none"
-							href="#" data-bs-toggle="dropdown"> <i class="align-middle"
-								data-feather="settings"></i>
-						</a> <a class="nav-link dropdown-toggle d-none d-sm-inline-block"
-							href="#" data-bs-toggle="dropdown"> <img
-								src="${initParam['basePath']}/assets/admin-kit/img/avatars/avatar.jpg"
-								class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span
-								class="text-dark">Charles Hall</span>
-						</a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i
-									class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
-							</div></li>
-					</ul>
-				</div>
-			</nav>
+			
+			<jsp:include page="/views/driver/layouts/nav-bar.jsp" />
+			
 
 			<main class="content">
 			<div class="container-fluid p-0">
@@ -176,102 +67,53 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="booking" items="${bookings}">
 							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-warning">On Going</span></td>
+								<td class="d-none d-xl-table-cell d-sm-table-cell"><c:out value="${booking.booking_start_location}" /></td>
+								<td class="d-none d-xl-table-cell"><c:out value="${booking.booking_end_location}" /></td>
+								<td class="d-none d-xl-table-cell"><c:out value="${booking.booking_time}" /></td>
+								
+								<c:set var = "bookinStatus" value = "${booking.booking_status}"/>
+								<c:if test="${bookinStatus == 'ONGOING'}">
+								<td><span class="badge bg-primary">ON GOING</span></td>
+								</c:if>
+								<c:if test="${bookinStatus == 'PENDING'}">
+								<td><span class="badge bg-warning">PENDING</span></td>
+								</c:if>
+								<c:if test="${bookinStatus == 'COMPLETE'}">
+								<td><span class="badge bg-success">COMPLETE</span></td>
+								</c:if>
+								<c:if test="${bookinStatus == 'DRIVER CANCEL'}">
+								<td><span class="badge bg-danger">DRIVER CANCEL</span></td>
+								</c:if>
+								<c:if test="${bookinStatus == 'USER CANCEL'}">
+								<td><span class="badge bg-danger">USER CANCEL</span></td>
+								</c:if>
+								
 								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
+										data-whatever="<c:out value="${booking.booking_id}" />" class="btn btn-primary btn-sm">
 										<i class="fa-solid fa-eye"></i> VIEW
 									</button></td>
+								
+								<input id="bookingStatus<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_status}" />"/>
+								<input id="bookingPickLocation<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_start_location}" />"/>
+								<input id="bookingDropLocation<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_end_location}" />"/>
+								<input id="bookingDate<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_time}" />"/>
+								<input id="bookingPickTime<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_driver_get_user_time}" />"/>
+								<input id="bookingDropTime<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_driver_drop_user_time}" />"/>
+								<input id="bookingCharge<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.bookin_charge}" />"/>
+								<input id="bookingClientName<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.user_name}" />"/>
+								<input id="bookingClientTP<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.user_tp_number}" />"/>
+								<input id="bookingDriverName<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.driver_user_name}" />"/>
+								<input id="bookingDriverTP<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.driver_tp_number}" />"/>
+								<input id="bookingVehicleType<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.vehicle_number}" />"/>
+								<input id="bookingVehicleNumber<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.vehicle_type}" />"/>
+								<input id="bookingCancelReason<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.booking_cancel_reason}" />"/>
+								<input id="bookingVehicleTypeID<c:out value="${booking.booking_id}" />" type="hidden"  value="<c:out value="${booking.vehicle_types_vehicle_types_id}" />"/>
+									
+								
 							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-danger">Cancelled</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
-							<tr>
-								<td class="d-none d-xl-table-cell d-sm-table-cell">Kandy
-									Lake, Anagarika Dharmapala Mawatha, Malwatta, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">Kandy Railway Station,
-									William Gopallawa Mawatha, Kandy, Sri Lanka</td>
-								<td class="d-none d-xl-table-cell">31/06/2022</td>
-								<td><span class="badge bg-success">FINISH</span></td>
-								<td><button data-toggle="modal" data-target="#exampleModal"
-										data-whatever="@mdo" class="btn btn-primary btn-sm">
-										<i class="fa-solid fa-eye"></i> VIEW
-									</button></td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 
@@ -286,7 +128,7 @@
 								<div class="modal-header">
 									<h5 style="font-weight: bold;" class="modal-title"
 										id="exampleModalLabel">
-										Booking Status : <span class="btn btn-success">JOUNURY
+										Booking Status : <span id="details-bookingStatus" class="btn">JOUNURY
 											END</span>
 									</h5>
 									<button type="button" class="close" data-dismiss="modal"
@@ -295,66 +137,104 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form>
+								
+								<form method="post" action="/GoCheeta//driver/my-bookings/update" id="updateBooking" >
+										<input type="hidden" id="bookingID" name="bookingID">
+										<div class="form-group" style="width: 155px;" id="isBookingStartDiv">
+											<div class="form-check form-check-inline">
+												<input style="font-size: large;" class="form-check-input" type="checkbox"
+													id="isBookingStart" name="isBookingStart"> <label
+													class="form-check-label" for="inlineCheckbox1" style="font-weight: bold;">Booking Start</label>
+											</div>
+										</div>
+										<div class="form-group" id="bookingVehicleDiv">
+											<label style="display: flex; font-weight: bold;"
+												for="message-text" class="col-form-label">Vehicle Driver:</label>
+											<select id="bookingVehicled" name="bookingVehicled" required="required" class="form-select mb-3">
+												<option selected value="">Select Your Vehicle</option>
+												
+											</select>
+										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Pick Up
 												Location:</label>
-											<p style="display: flex;">55 Sirimalwatta - Amunugama -
+											<p id="details-bookingPickLocation" style="display: flex;">55 Sirimalwatta - Amunugama -
 												Madawala Rd, Sirimalwatta</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Drop
 												Location:</label>
-											<p style="display: flex;">55 Sirimalwatta - Amunugama -
+											<p id="details-bookingDropLocation" style="display: flex;">55 Sirimalwatta - Amunugama -
 												Madawala Rd, Sirimalwatta</p>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Date:</label>
-											<p style="display: flex;">01-01-2021</p>
+											<p id="details-bookingTime" style="display: flex;">01-01-2021</p>
+										</div>
+										<div class="form-group" style="width: 155px;" id="isUserPickDiv">
+											<div class="form-check form-check-inline">
+												<input style="font-size: large;" class="form-check-input" type="checkbox"
+													id="isUserPick" name="isUserPick"> <label
+													class="form-check-label" for="inlineCheckbox1" style="font-weight: bold;">User Picked</label>
+											</div>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
 												for="message-text" class="col-form-label">Pick Up
 												Time:</label>
-											<p style="display: flex;">01.15 PM</p>
+											<p id="details-bookingPickTime" style="display: flex;">01.15 PM</p>
 										</div>
-										<div class="form-group">
-											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Drop Time:</label>
-											<p style="display: flex;">04.15 PM</p>
-										</div>
-										<div class="form-group">
-											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Charge:</label>
-											<p style="display: flex;">RS. 2500.00</p>
-										</div>
-										<div class="form-group">
-											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Client:</label>
-											<p style="display: flex;">Dexter Morgan | TP : 0711234567</p>
-										</div>
-										<div class="form-group">
+										<div class="form-group" style="width: 155px;" id="isUserDropDiv">
 											<div class="form-check form-check-inline">
 												<input style="font-size: large;" class="form-check-input" type="checkbox"
-													id="inlineCheckbox1" value="option1"> <label
-													class="form-check-label" for="inlineCheckbox1">Booking Cancel</label>
+													id="isUserDrop" name="isUserDrop"> <label
+													class="form-check-label" for="inlineCheckbox1" style="font-weight: bold;">User Dropd</label>
 											</div>
 										</div>
 										<div class="form-group">
 											<label style="display: flex; font-weight: bold;"
-												for="message-text" class="col-form-label">Note:</label>
-											<textarea class="form-control" id="message-text"></textarea>
+												for="message-text" class="col-form-label">Drop Time:</label>
+											<p id="details-bookingDropTime" style="display: flex;">04.15 PM</p>
+										</div>
+										<div class="form-group">
+											<label style="display: flex; font-weight: bold;"
+												for="message-text" class="col-form-label">Charge:</label>
+											<p id="details-bookingCharge" style="display: flex;">RS. 2500.00</p>
+										</div>
+										<div class="form-group">
+											<label style="display: flex; font-weight: bold;"
+												for="message-text" class="col-form-label">Client:</label>
+											<p id="details-bookingClientDetails" style="display: flex;">Dexter Morgan | TP : 0711234567</p>
+										</div>
+
+										<div class="form-group">
+											<label style="display: flex; font-weight: bold;"
+												for="message-text" class="col-form-label">Vehicle:</label>
+											<p id="details-bookingVehicleDetals" style="display: flex;">SUV | No : AAA - 8745</p>
+										</div>
+										<div class="form-group" style="width: 155px;" id="isBookingCancelDiv">
+											<div class="form-check form-check-inline">
+												<input style="font-size: large;" class="form-check-input" type="checkbox"
+													id="bookingCancelCheckBox" name="isBookingCancel"> <label
+													class="form-check-label" for="inlineCheckbox1">Booking Cancel</label>
+											</div>
+										</div>
+									<div id="bookingCancelNoteDiv" class="form-group" style="display: none;">
+											<label style="display: flex; font-weight: bold;"
+												for="message-text" class="col-form-label">Cancel Note:</label>
+											<textarea class="form-control" id="bookingCancelNote" name="bookingCancelNote"></textarea>
 										</div>
 									</form>
+								
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Update</button>
-								</div>
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<button form="updateBooking" type="submit" class="btn btn-primary">Update</button>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -362,15 +242,48 @@
 
 					<nav aria-label="Page navigation example" style="margin-top: 5%;">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
+
+							<%
+								int branchCount = Integer.parseInt(request.getAttribute("bookingsCount").toString());
+								double recordForPage = 8;
+								double pageCount = Math.ceil(branchCount / recordForPage);
+								int curntPage = 1;
+
+								if (request.getParameter("page") != null) {
+									curntPage = Integer.parseInt(request.getParameter("page"));
+								} else {
+									curntPage = 1;
+								}
+								if (curntPage > 1) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/driver/my-bookings?page=<%=curntPage - 1%>"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
+							<%
+								}
+								for (int i = 1; i <= pageCount; i++) {
+									if (curntPage == i) {
+							%>
+							<li class="page-item active"><a class="page-link"
+								href="/GoCheeta/driver/my-bookings?page=<%=i%>"><%=i%></a></li>
+							<%
+								}else{
+									%>
+									<li class="page-item"><a class="page-link"
+								href="/GoCheeta/driver/my-bookings?page=<%=i%>"><%=i%></a></li>
+									<%
+								}
+								}
+								if (curntPage < pageCount) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="/GoCheeta/driver/my-bookings?page=<%=curntPage + 1%>"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
+							<%
+								}
+							%>
 						</ul>
 					</nav>
 
@@ -399,6 +312,189 @@
 		src="${initParam['basePath']}/assets/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript"
 		src="${initParam['basePath']}/assets/js/bootstrap.js"></script>
+		
+			<script>
+	if(performance.navigation.type == 2){
+		   location.reload(true);
+		}
+	</script>
+	
+	<script type="text/javascript">
+		$('#exampleModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget);
+			var recipient = button.data('whatever');
+			
+
+			var bookingStatus = $("#bookingStatus" + recipient).val();
+			var bookingPickLocation = $("#bookingPickLocation" + recipient).val();
+			var bookingDropLocation = $("#bookingDropLocation" + recipient).val();
+			var bookingDate = $("#bookingDate" + recipient).val();
+			var bookingPickTime = $("#bookingPickTime" + recipient).val();
+			var bookingDropTime = $("#bookingDropTime" + recipient).val();
+			var bookingCharge = $("#bookingCharge" + recipient).val();
+			var bookingClientName = $("#bookingClientName" + recipient).val();
+			var bookingClientTP = $("#bookingClientTP" + recipient).val();
+			var bookingDriverName = $("#bookingDriverName" + recipient).val();
+			var bookingDriverTP = $("#bookingDriverTP" + recipient).val();
+			var bookingVehicleType = $("#bookingVehicleType" + recipient).val();
+			var bookingVehicleNumber = $("#bookingVehicleNumber" + recipient).val();
+			var bookingCancelReason = $("#bookingCancelReason" + recipient).val();
+			var bookingVehicleTypeID = $("#bookingVehicleTypeID" + recipient).val();
+
+			var modal = $(this);
+			//modal.find('#edit-vehicleID').val(recipient);
+			
+			if(bookingPickTime == ""){
+				bookingPickTime = "-";
+			}
+			if(bookingDropTime == ""){
+				bookingDropTime = "-";
+			}
+			if(bookingDriverName == ""){
+				bookingDriverName = "-";
+			}
+			if(bookingDriverTP == ""){
+				bookingDriverTP = "-";
+			}
+			if(bookingVehicleType == ""){
+				bookingVehicleType = "-";
+			}
+			if(bookingVehicleNumber == ""){
+				bookingVehicleNumber = "-";
+			}
+			
+			
+			$('#details-bookingStatus').removeClass();
+			$('#details-bookingStatus').addClass("btn");
+			
+			if(bookingStatus == "PENDING"){				
+				$('#details-bookingStatus').addClass("btn-warning");
+				$("#isBookingCancelDiv").css("display","block");
+			}else if (bookingStatus == "ONGOING") {
+				$('#details-bookingStatus').addClass("btn-primary");
+				$("#isBookingCancelDiv").css("display","block");
+			}else if (bookingStatus == "COMPLETE") {
+				$('#details-bookingStatus').addClass("btn-success");
+				$("#isBookingCancelDiv").css("display","none");
+			}else {
+				$('#details-bookingStatus').addClass("btn-danger");
+				$('#isBookingCancelDiv').css("display","none");
+			}
+			
+			if(bookingCancelReason != ""){
+				$("#bookingCancelNoteDiv").css("display","block");
+				$("#bookingCancelNote").val(bookingCancelReason);
+				$("#bookingCancelCheckBox").prop("disabled", true);
+				$("#bookingCancelCheckBox").prop("checked", true);
+				$("#bookingCancelNote").prop("disabled", true);
+			}else{
+				$("#bookingCancelNoteDiv").css("display","none");
+				$("#bookingCancelNote").val("");
+				$("#bookingCancelCheckBox").prop("disabled", false);
+				$("#bookingCancelCheckBox").prop("checked", false);
+				$("#bookingCancelNote").prop("disabled", false);
+			}
+			
+			if(bookingPickTime == '-'){
+				$("#isUserPickDiv").css("display","block");
+			}else {
+				$("#isUserPickDiv").css("display","none");
+			}
+			
+			if(bookingDropTime == '-'){
+				$("#isUserDropDiv").css("display","block");
+			}else {
+				$("#isUserDropDiv").css("display","none");
+			}
+			
+			if(bookingStatus == 'PENDING'){
+				$("#isBookingStartDiv").css("display","block");
+				$("#bookingVehicleDiv").css("display","block");
+				
+				$("#isBookingStart").prop('required',true);
+				$("#bookingVehicled").prop('required',true);
+				
+				$("#isUserDropDiv").css("display","none");
+				$("#isUserPickDiv").css("display","none");
+			}else {
+				$("#isBookingStartDiv").css("display","none");
+				$("#bookingVehicleDiv").css("display","none");
+				
+				$("#isBookingStart").prop('required',false);
+				$("#bookingVehicled").prop('required',false);
+				
+				if(bookingPickTime == '-'){
+					$("#isUserPickDiv").css("display","block");
+				}else {
+					$("#isUserPickDiv").css("display","none");
+				}
+				
+				if(bookingDropTime == '-'){
+					$("#isUserDropDiv").css("display","block");
+				}else {
+					$("#isUserDropDiv").css("display","none");
+				}
+			}
+			
+			
+			var xhr = new XMLHttpRequest();
+
+	        xhr.onreadystatechange = function () {
+	            if (xhr.readyState == XMLHttpRequest.DONE) {
+//	                alert(xhr.responseText);
+	                var jsonData = JSON.parse(xhr.responseText);
+	                if(jsonData.status == true){
+	                	$('#bookingVehicled').find('option').remove().end().append('<option selected value="">Select Your Vehicle</option>');
+	                	for(var i =0; i< jsonData.vehicleList.length; i++){
+	                	$("#bookingVehicled").append(new Option(jsonData.vehicleList[i].vehicle_number, jsonData.vehicleList[i].vehicle_id));
+	                	//console.log(jsonData.vehicleList[i].vehicle_id);
+	                	//console.log(jsonData.vehicleList[i].vehicle_number);
+	                	}
+	
+	
+	            	}else{
+	            		$('#bookingVehicled').find('option').remove().end().append('<option selected value="">Select Your Vehicle</option>');
+	            	}
+	        }
+	        }
+
+	        xhr.open('GET', '/GoCheeta/driver/my-bookings/my-vehivles?v-id='+bookingVehicleTypeID);
+	        xhr.setRequestHeader('Content-Type', 'application/json');
+	        xhr.send();
+
+	        modal.find('#bookingID').val(recipient);
+
+			modal.find('#details-bookingStatus').text(bookingStatus);
+			modal.find('#details-bookingPickLocation').text(bookingPickLocation);
+			modal.find('#details-bookingDropLocation').text(bookingDropLocation);
+			modal.find('#details-bookingTime').text(bookingDate);
+			modal.find('#details-bookingPickTime').text(bookingPickTime);
+			modal.find('#details-bookingDropTime').text(bookingDropTime);
+			modal.find('#details-bookingCharge').text(bookingCharge);
+			modal.find('#details-bookingClientDetails').text(bookingClientName+" | "+bookingClientTP);
+			modal.find('#details-bookingDriverDetails').text(bookingDriverName+" | "+bookingDriverTP);
+			modal.find('#details-bookingVehicleDetals').text(bookingVehicleType+" | "+bookingVehicleNumber);
+			modal.find('#details-bookingCancelReason').text(bookingCancelReason);
+
+		})
+	</script>
+	
+	<script>
+	
+	$("#bookingCancelCheckBox").on("change" , function() {
+		console.log($("#bookingCancelCheckBox").is(':checked'));
+		if($("#bookingCancelCheckBox").is(':checked') == true){
+			$("#bookingCancelNoteDiv").css("display","block");
+			$("#bookingCancelNote").prop('required',true);
+		}else {
+			console.log("Click");
+			$("#bookingCancelNoteDiv").css("display","none");
+			$("#bookingCancelNote").prop('required',false);
+		}
+		
+	});
+	
+	</script>
 
 </body>
 

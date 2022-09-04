@@ -7,6 +7,13 @@ public class Branches {
 	protected String branch_loaction;
 	protected String brancheCordinate;
 	protected int branche_status;
+	protected double branch_total_collection;
+
+	public Branches(int branch_id, double branch_total_collection) {
+		super();
+		this.branch_id = branch_id;
+		this.branch_total_collection = branch_total_collection;
+	}
 
 	public Branches(int branch_id, String branch_name, String branch_loaction, String brancheCordinate,
 			int branche_status) {
@@ -64,6 +71,14 @@ public class Branches {
 
 	public void setBranche_status(int branche_status) {
 		this.branche_status = branche_status;
+	}
+
+	public double getBranch_total_collection() {
+		return branch_total_collection;
+	}
+
+	public void setBranch_total_collection(double branch_total_collection) {
+		this.branch_total_collection = branch_total_collection;
 	}
 
 }

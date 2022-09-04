@@ -16,6 +16,8 @@ public class Vehicle_TypesDAO {
 
 	private final String SELECT_ALL_VEHICLE_TYPES = "SELECT * FROM vehicle_types LIMIT ?, ?;";
 
+	private final String SELECT_ALL_ONLINE_VEHICLE_TYPES = "SELECT * FROM vehicle_types WHERE vehicle_type_status = 1 LIMIT ?, ?;";
+
 	private final String SELECT_VEHICLE_TYPES_BY_ID = "SELECT * FROM vehicle_types WHERE vehicle_types_id = ?;";
 
 	private final String ADD_VEHICLE_TYPES = "INSERT INTO vehicle_types (vehicle_type, vehicle_type_price, vehicle_type_status) VALUES (?, ?, ?);";
@@ -63,6 +65,36 @@ public class Vehicle_TypesDAO {
 		try (Connection connection = masterDataObj.getConnection();
 
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_VEHICLE_TYPES);) {
+			preparedStatement.setInt(1, startCount);
+			preparedStatement.setInt(2, recordCount);
+			System.out.println(preparedStatement);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+
+				int vehicle_types_id = rs.getInt("vehicle_types_id");
+				String vehicle_type = rs.getString("vehicle_type");
+				double vehicle_type_price = rs.getDouble("vehicle_type_price");
+				int vehicle_type_status = rs.getInt("vehicle_type_status");
+
+				vehicle_Types.add(
+						new Vehicle_Types(vehicle_types_id, vehicle_type, vehicle_type_price, vehicle_type_status));
+
+			}
+		} catch (SQLException e) {
+			masterDataObj.printSQLException(e);
+		}
+		return vehicle_Types;
+	}
+
+	public List<Vehicle_Types> selectAllOnlineVehicleTypes(int startCount, int recordCount) {
+
+		List<Vehicle_Types> vehicle_Types = new ArrayList<>();
+
+		try (Connection connection = masterDataObj.getConnection();
+
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ONLINE_VEHICLE_TYPES);) {
 			preparedStatement.setInt(1, startCount);
 			preparedStatement.setInt(2, recordCount);
 			System.out.println(preparedStatement);

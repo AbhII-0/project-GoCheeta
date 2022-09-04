@@ -14,9 +14,9 @@ public class DriversDAO {
 
 	MasterData masterDataObj = new MasterData();
 
-	private final String GET_DRIVER_BY_UNAME_PWORD = "SELECT * FROM drivers WHERE (driver_user_name = ? ) AND (driver_password = ?) LIMIT 1;";
+	private final String GET_DRIVER_BY_UNAME_PWORD = "SELECT * FROM drivers WHERE (driver_user_name = ? ) AND (driver_password = ?) AND (driver_account_status = 1) LIMIT 1;";
 
-	private final String GET_DRIVER_BY_ID = "SELECT * FROM drivers WHERE driver_id = ? LIMIT 1;";
+	private final String GET_DRIVER_BY_ID = "SELECT * FROM drivers WHERE (driver_id = ?) AND (driver_account_status = 1) LIMIT 1;";
 
 	private final String ADD_DRIVER = "INSERT INTO drivers (driver_user_name, driver_email, driver_tp_number, driverProfilePic, driver_password, driver_account_status, driver_account_verification, driver_status, driver_license_number, branches_branch_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -26,7 +26,47 @@ public class DriversDAO {
 
 	private final String SELECT_ALL_DRIVERS = "SELECT drivers.*, branches.branch_loaction FROM drivers JOIN branches ON drivers.branches_branch_id = branches.branch_id LIMIT ?, ?";
 
+	private final String SELECT_ALL_ONLINE_DRIVERS = "SELECT drivers.*, branches.branch_loaction FROM drivers JOIN branches ON drivers.branches_branch_id = branches.branch_id WHERE driver_account_status = 1 LIMIT ?, ?";
+
 	private final String SELECT_DRIVERS_COUNT_SQL = "SELECT COUNT(*) AS drivers_count FROM drivers;";
+
+	private final String UPDATE_DRIVER_STATUS = "UPDATE drivers SET driver_status = ? WHERE driver_id = ?;";
+
+	private final String GET_DRIVER_STATUS = "SELECT driver_status FROM drivers WHERE driver_id = ?;";
+
+	public String getDriverStatus(int driver_id) {
+
+		String driver_status = null;
+
+		try (Connection connection = masterDataObj.getConnection();
+
+				PreparedStatement preparedStatement = connection.prepareStatement(GET_DRIVER_STATUS);) {
+			preparedStatement.setInt(1, driver_id);
+			System.out.println(preparedStatement);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				driver_status = rs.getString("driver_status");
+			}
+
+		} catch (SQLException e) {
+			masterDataObj.printSQLException(e);
+		}
+
+		return driver_status;
+	}
+
+	public boolean updateDriverStatus(String status, int driver_id) throws SQLException {
+		boolean rowUpdated;
+		try (Connection connection = masterDataObj.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DRIVER_STATUS);) {
+			preparedStatement.setString(1, status);
+			preparedStatement.setInt(2, driver_id);
+
+			rowUpdated = preparedStatement.executeUpdate() > 0;
+		}
+		return rowUpdated;
+	}
 
 	public boolean insertDriverUsers(Drivers drivers) throws SQLException {
 		boolean rowAdded;
@@ -129,6 +169,43 @@ public class DriversDAO {
 		return drivers;
 	}
 
+	public List<Drivers> selectAllOnlineDrivers(int startCount, int recordCount) {
+
+		List<Drivers> drivers = new ArrayList<>();
+
+		try (Connection connection = masterDataObj.getConnection();
+
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ONLINE_DRIVERS);) {
+			preparedStatement.setInt(1, startCount);
+			preparedStatement.setInt(2, recordCount);
+			System.out.println(preparedStatement);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+
+				int driver_id = rs.getInt("driver_id");
+				String driver_user_name = rs.getString("driver_user_name");
+				String driver_email = rs.getString("driver_email");
+				String driver_tp_number = rs.getString("driver_tp_number");
+				String driverProfilePic = rs.getString("driverProfilePic");
+				int driver_account_status = rs.getInt("driver_account_status");
+				int driver_account_verification = rs.getInt("driver_account_verification");
+				String driver_status = rs.getString("driver_status");
+				String driver_license_number = rs.getString("driver_license_number");
+				int branches_branch_id = rs.getInt("branches_branch_id");
+				String branch_loaction = rs.getString("branch_loaction");
+
+				drivers.add(new Drivers(driver_id, driver_user_name, driver_email, driver_tp_number, driverProfilePic,
+						driver_account_status, driver_account_verification, driver_status, driver_license_number,
+						branches_branch_id, branch_loaction));
+			}
+		} catch (SQLException e) {
+			masterDataObj.printSQLException(e);
+		}
+		return drivers;
+	}
+
 	public boolean findDriver(Drivers drivers) throws SQLException {
 		boolean selectRow;
 
@@ -170,12 +247,13 @@ public class DriversDAO {
 				String driverProfilePic = rs.getString("driverProfilePic");
 				int driver_account_status = rs.getInt("driver_account_status");
 				int driver_account_verification = rs.getInt("driver_account_verification");
+				String driver_status = rs.getString("driver_status");
 				String driver_license_number = rs.getString("driver_license_number");
 				int branches_branch_id = rs.getInt("branches_branch_id");
 
 				driverDetails.add(new Drivers(driver_id, driver_user_name, driver_email, driver_tp_number,
-						driverProfilePic, driver_account_status, driver_account_verification, driver_license_number,
-						branches_branch_id));
+						driverProfilePic, driver_account_status, driver_account_verification, driver_status,
+						driver_license_number, branches_branch_id));
 
 			}
 

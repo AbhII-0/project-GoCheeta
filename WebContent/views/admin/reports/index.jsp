@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+if(session.getAttribute("adminUserId") == null){	
+	response.sendRedirect("/GoCheeta/admin/sign-in");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,22 +56,22 @@
 					style="padding-top: 10px; background: #ffffffc4; border-top-left-radius: 20px; border-top-right-radius: 20px; padding-left: 5px; padding-right: 5px;">
 
 					<form style="margin-bottom: 15px;"
-						class="row row-cols-lg-auto g-3 align-items-center">
+						class="row row-cols-lg-auto g-3 align-items-center" method="post" action="/GoCheeta/admin/reports">
 
 						<div class="col-12">
 							<label class="visually-hidden" for="inlineFormSelectPref">From
 								Date</label>
 							<p>From Date</p>
-							<input required="required" id="fromDate" type="date"/>
+							<input required="required" id="fromDate" name="fromDate" type="date"/>
 						</div>
 						<div class="col-12">
 							<label class="visually-hidden" for="inlineFormSelectPref">To
 								Date</label>
 							<p>To Date</p>
-							<input required="required" id="toDate" type="date">
+							<input required="required" id="toDate" name="toDate" type="date">
 						</div>
 
-						<div class="col-12">
+						<!--<div class="col-12">
 							<label class="visually-hidden" for="inlineFormSelectPref">Brnch</label>
 							<p>Brnch</p>
 							<select class="form-select" id="inlineFormSelectPref">
@@ -74,7 +80,7 @@
 								<option value="2">Two</option>
 								<option value="3">Three</option>
 							</select>
-						</div>
+						</div>-->
 
 						<div class="col-12">
 							<button style="margin-top: 33px;" type="submit"
@@ -90,10 +96,9 @@
 
 					<table class="table table-hover my-0" id="totalSale">
 						<caption
-							style="font-weight: bold; caption-side: top; font-size: x-large; color: black;">Total
-							Sale From 01/01/2022 - 08/24/2022</caption>
-						<caption style="caption-side: bottom;">Total Sale From
-							01/01/2022 - 08/24/2022</caption>
+							style="font-weight: bold; caption-side: top; font-size: x-large; color: black;">TOTAL COLECTION FROM <span id="topicStartDateTop">01/01/2022</span> - <span id="topicEndtDateTop">08/24/2022</span></caption>
+						<caption style="caption-side: bottom;">TOTAL COLECTION FROM
+							<span id="topicStartDateBot">01/01/2022</span> - <span id="topicEndtDateBot">08/24/2022</caption>
 						<thead>
 							<tr>
 								<th>#</th>
@@ -103,54 +108,26 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:set var = "fromDate" value = "${fromDate}"/>
+						<c:set var = "toDate" value = "${toDate}"/>
+						<input type="hidden" id="fromDateResived" value="<c:out value="${fromDate}" />">
+						<input type="hidden" id="toDateResived" value="<c:out value="${toDate}" />">
+						
+						<c:forEach var="branch" items="${listBranches}">
+						
 							<tr>
-								<td>001</td>
-								<td>Kandy</td>
-								<td>01/01/2022 - 08/24/2022</td>
-								<td>RS 50000.00</td>
+								<td>B-00<c:out value="${branch.branch_id}" /></td>
+								<td><c:out value="${branch.branch_loaction}" /></td>
+								<td><c:out value="${fromDate}" /> - <c:out value="${toDate}" /></td>
+								<c:forEach var="branchRev" items="${branchesRev}">
+								<td>RS. <c:if test="${branch.branch_id == branchRev.branch_id}"><c:out value="${branchRev.branch_total_collection}" /></c:if><c:if test="${branch.branch_id != branchRev.branch_id}">0.00</c:if></td>
+								</c:forEach>
+								<c:if test="${branchesRev.size() < 1}">
+								<td>RS. 0.00</td>
+								</c:if>
+								
 							</tr>
-							<tr>
-								<td>001</td>
-								<td>Kandy</td>
-								<td>01/01/2022 - 08/24/2022</td>
-								<td>RS 50000.00</td>
-							</tr>
-							<tr>
-								<td>001</td>
-								<td>Kandy</td>
-								<td>01/01/2022 - 08/24/2022</td>
-								<td>RS 50000.00</td>
-							</tr>
-							<tr>
-								<td>001</td>
-								<td>Kandy</td>
-								<td>01/01/2022 - 08/24/2022</td>
-								<td>RS 50000.00</td>
-							</tr>
-							<tr>
-								<td>001</td>
-								<td>Kandy</td>
-								<td>01/01/2022 - 08/24/2022</td>
-								<td>RS 50000.00</td>
-							</tr>
-							<tr>
-								<td>001</td>
-								<td>Kandy</td>
-								<td>01/01/2022 - 08/24/2022</td>
-								<td>RS 50000.00</td>
-							</tr>
-							<tr>
-								<td>001</td>
-								<td>Kandy</td>
-								<td>01/01/2022 - 08/24/2022</td>
-								<td>RS 50000.00</td>
-							</tr>
-							<tr>
-								<td>001</td>
-								<td>Kandy</td>
-								<td>01/01/2022 - 08/24/2022</td>
-								<td>RS 50000.00</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 
@@ -210,10 +187,24 @@
 			var yyyy = today.getFullYear();
 
 			today = yyyy + '-' + mm + '-' + dd;
+			
+			var fromDate = $("#fromDateResived").val();
+			var toDate = $("#toDateResived").val();
 
-			$("#fromDate").val(today);
-			$("#toDate").val(today);
+			$("#fromDate").val(fromDate);
+			$("#toDate").val(toDate);
+			
+			$("#topicStartDateTop").text(fromDate);
+			$("#topicEndtDateTop").text(toDate);
+			
+			$("#topicStartDateBot").text(fromDate);
+			$("#topicEndtDateBot").text(toDate);
 		});
+	</script>
+	<script>
+	if(performance.navigation.type == 2){
+		   location.reload(true);
+		}
 	</script>
 
 </body>

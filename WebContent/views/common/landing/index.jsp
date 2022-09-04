@@ -54,7 +54,7 @@
 		<header class="header_section">
 			<div class="container-fluid">
 				<nav class="navbar navbar-expand-lg custom_nav-container ">
-					<a class="navbar-brand" href="index.html"> <span
+					<a class="navbar-brand" href="/GoCheeta/common/landing"> <span
 						style="color: black; background: #FF0063; padding: 10px; border-radius: 5px;">
 							GoCheeta <i class="fa-solid fa-taxi fa-xl"
 							style="color: #fffa00;"></i>
@@ -132,15 +132,15 @@
 						</h3>
 
 						<div class="btn-box-cus">
-							<a href="" class="btn-1-cus"> SIGN IN </a>
+							<a href="/GoCheeta/common/sign-in" class="btn-1-cus"> SIGN IN </a>
 						</div>
 
 						<div class="btn-box-cus">
-							<a href="" class="btn-1-cus"> SIGN UP </a>
+							<a href="/GoCheeta/common/register" class="btn-1-cus"> SIGN UP </a>
 						</div>
 
 						<div class="btn-box-cus" >
-							<a href="" class="btn-1-cus" style="width: 200px"> TAKE A LOOK </a>
+							<a href="/GoCheeta/common/home" class="btn-1-cus" style="width: 200px"> TAKE A LOOK </a>
 						</div>
 
 					</div>

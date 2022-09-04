@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+if(session.getAttribute("adminUserId") == null){	
+	response.sendRedirect("/GoCheeta/admin/sign-in");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +69,7 @@
 													</div>
 												</div>
 											</div>
-											<h1 class="mt-1 mb-3">2.382</h1>
+											<h1 class="mt-1 mb-3"><c:out value="${bookingsCount}" /></h1>
 										</div>
 									</div>
 									<div class="card">
@@ -79,7 +85,7 @@
 													</div>
 												</div>
 											</div>
-											<h1 class="mt-1 mb-3">14.212</h1>
+											<h1 class="mt-1 mb-3"><c:out value="${driversCount}" /></h1>
 										</div>
 									</div>
 								</div>
@@ -97,7 +103,7 @@
 													</div>
 												</div>
 											</div>
-											<h1 class="mt-1 mb-3">$21.300</h1>
+											<h1 class="mt-1 mb-3">RS. <c:out value="${rev}" /></h1>
 										</div>
 									</div>
 									<div class="card">
@@ -113,7 +119,7 @@
 													</div>
 												</div>
 											</div>
-											<h1 class="mt-1 mb-3">4</h1>
+											<h1 class="mt-1 mb-3"><c:out value="${vehiclesCount}" /></h1>
 										</div>
 									</div>
 								</div>
@@ -155,66 +161,156 @@
 	</div>
 
 	<script src="${initParam['basePath']}/assets/admin-kit/js/app.js"></script>
+	
+	<script>		
+	document.addEventListener("DOMContentLoaded", function() {
+			
+			const mnths = [];
+			const revs = [];
+			
+			var xhr = new XMLHttpRequest();
+			
+			xhr.onreadystatechange = function () {
+				  setTimeout(function() {
+			        }, 3000);
+	            if (xhr.readyState == XMLHttpRequest.DONE) {
+//	                alert(xhr.responseText);
+	                var jsonData = JSON.parse(xhr.responseText);
+	                if(jsonData.status == true){
+					//console.table(jsonData.monthsRev);
+					
+					for(var i = 0; i < jsonData.monthsRev.length; i++){
+						
+						var mnthText = "";
+						//console.table(jsonData.monthsRev[i].mnth);
+						switch (jsonData.monthsRev[i].mnth) {
+						  case 1:
+							  mnthText = "JAN";
+						    break;
+						  case 2:
+							  mnthText = "FEB";
+						    break;
+						  case 3:
+							  mnthText = "MAR";
+							    break;
+						  case 4:
+							  mnthText = "APR";
+							    break;
+						  case 5:
+							  mnthText = "AMY";
+							    break;
+						  case 6:
+							  mnthText = "JUN";
+							    break;
+						  case 7:
+							  mnthText = "JUL";
+							    break;
+						  case 8:
+							  mnthText = "AUG";
+							    break;
+						  case 9:
+							  mnthText = "SEP";
+							    break;
+						  case 10:
+							  mnthText = "OCT";
+							    break;
+						  case 11:
+							  mnthText = "NOV";
+							    break;
+						  default:
+							  mnthText = "DEC";
+							}	
+						
+						//console.log(mnthText);
+
+					  
+					  mnths.push(mnthText);
+					  revs.push(jsonData.monthsRev[i].rev);
+						}
+						console.log(typeof mnths);
+						console.log(typeof revs);
+						
+						var ctx = document.getElementById("chartjs-dashboard-line")
+						.getContext("2d");
+				var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+				gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+				gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+				// Line chart
+				new Chart(document.getElementById("chartjs-dashboard-line"), {
+					type : "line",
+					data : {
+						labels : mnths,
+						datasets : [ {
+							label : "Sales (RS. )",
+							fill : true,
+							backgroundColor : gradient,
+							borderColor : window.theme.primary,
+							data : revs
+						} ]
+					},
+					options : {
+						maintainAspectRatio : false,
+						legend : {
+							display : false
+						},
+						tooltips : {
+							intersect : false
+						},
+						hover : {
+							intersect : true
+						},
+						plugins : {
+							filler : {
+								propagate : false
+							}
+						},
+						scales : {
+							xAxes : [ {
+								reverse : true,
+								gridLines : {
+									color : "rgba(0,0,0,0.0)"
+								}
+							} ],
+							yAxes : [ {
+								ticks : {
+									stepSize : 1000
+								},
+								display : true,
+								borderDash : [ 3, 3 ],
+								gridLines : {
+									color : "rgba(0,0,0,0.0)"
+								}
+							} ]
+						}
+					}
+				});
+						
+	            	}else{
+	            		
+	            		var canvas = document.getElementById("chartjs-dashboard-line");
+	            		var ctx = canvas.getContext("2d");
+	            		ctx.font = "15px system-ui";
+	            		ctx.fillText("No data found...!", 150, canvas.height/2);
+	            		ctx.fillText("Make Bookings..!", 150, (canvas.height/2)+40);
+	            	}
+	        }
+	        }
+	        
+	        xhr.open('GET', '/GoCheeta/admin/dashboard/get-chart-data',true);
+	        xhr.setRequestHeader('Content-Type', 'application/json');
+	        xhr.send();
+	        	
+			
+			
+		});
+	</script>
 
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var ctx = document.getElementById("chartjs-dashboard-line")
-					.getContext("2d");
-			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-			// Line chart
-			new Chart(document.getElementById("chartjs-dashboard-line"), {
-				type : "line",
-				data : {
-					labels : [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-							"Aug", "Sep", "Oct", "Nov", "Dec" ],
-					datasets : [ {
-						label : "Sales ($)",
-						fill : true,
-						backgroundColor : gradient,
-						borderColor : window.theme.primary,
-						data : [ 2115, 1562, 1584, 1892, 1587, 1923, 2566,
-								2448, 2805, 3438, 2917, 3327 ]
-					} ]
-				},
-				options : {
-					maintainAspectRatio : false,
-					legend : {
-						display : false
-					},
-					tooltips : {
-						intersect : false
-					},
-					hover : {
-						intersect : true
-					},
-					plugins : {
-						filler : {
-							propagate : false
-						}
-					},
-					scales : {
-						xAxes : [ {
-							reverse : true,
-							gridLines : {
-								color : "rgba(0,0,0,0.0)"
-							}
-						} ],
-						yAxes : [ {
-							ticks : {
-								stepSize : 1000
-							},
-							display : true,
-							borderDash : [ 3, 3 ],
-							gridLines : {
-								color : "rgba(0,0,0,0.0)"
-							}
-						} ]
-					}
-				}
-			});
-		});
+	console.log(performance.navigation.type);
+	if(performance.navigation.type == 2){
+			console.log("Reload");
+		   location.reload(true);
+		}
 	</script>
 
 </body>

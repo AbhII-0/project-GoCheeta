@@ -16,13 +16,86 @@ public class VehiclesDAO {
 
 	private final String SELECT_ALL_VEHICLES = "SELECT * FROM vehicles LIMIT ?, ?;";
 
+	private final String SELECT_ALL_VEHICLES_BY_DRIVER = "SELECT * FROM vehicles WHERE drivers_driver_id = ? LIMIT ?, ?;";
+
 	private final String SELECT_VEHICLES_BY_ID = "SELECT * FROM vehicles WHERE vehicle_id = ?;";
 
 	private final String ADD_VEHICLE = "INSERT INTO vehicles (vehicle_number, vehicle_description, vehicle_status, vehicle_types_vehicle_types_id, drivers_driver_id) VALUES (?, ?, ?, ?, ?);";
 
 	private final String UPDATE_VEHICLE = "UPDATE vehicles SET vehicle_number = ?, vehicle_description = ?, vehicle_status = ?, vehicle_types_vehicle_types_id = ?, drivers_driver_id = ? WHERE vehicle_id = ?;";
 
-	private final String SELECT_VEHICLE_TYPE_COUNT = "SELECT COUNT(*) AS vehicles_count FROM vehicles;";
+	private final String SELECT_VEHICLE_COUNT = "SELECT COUNT(*) AS vehicles_count FROM vehicles;";
+
+	private final String SELECT_VEHICLE_TYPE_COUNT_BY_DRIVER = "SELECT COUNT(*) AS vehicles_count FROM vehicles WHERE drivers_driver_id = ?;";
+
+	private final String SELECT__DRIVER_VEHICLE = "SELECT vehicles.* FROM vehicles JOIN drivers "
+			+ "ON vehicles.drivers_driver_id = drivers.driver_id "
+			+ "WHERE vehicles.vehicle_types_vehicle_types_id = ? AND vehicles.drivers_driver_id = ? AND vehicle_status = 1;";
+
+	public List<Vehicles> selectAllVehiclesByDriver(int driver_id, int startCount, int recordCount) {
+
+		List<Vehicles> vehicles = new ArrayList<>();
+
+		try (Connection connection = masterDataObj.getConnection();
+
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_VEHICLES_BY_DRIVER);) {
+			preparedStatement.setInt(1, driver_id);
+			preparedStatement.setInt(2, startCount);
+			preparedStatement.setInt(3, recordCount);
+			System.out.println(preparedStatement);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+
+				int vehicle_id = rs.getInt("vehicle_id");
+				String vehicle_number = rs.getString("vehicle_number");
+				String vehicle_description = rs.getString("vehicle_description");
+				int vehicle_status = rs.getInt("vehicle_status");
+				int vehicle_types_vehicle_types_id = rs.getInt("vehicle_types_vehicle_types_id");
+				int drivers_driver_id = rs.getInt("drivers_driver_id");
+
+				vehicles.add(new Vehicles(vehicle_id, vehicle_number, vehicle_description, vehicle_status,
+						vehicle_types_vehicle_types_id, drivers_driver_id));
+
+			}
+		} catch (SQLException e) {
+			masterDataObj.printSQLException(e);
+		}
+		return vehicles;
+	}
+
+	public List<Vehicles> selectVehiclesByDriver(int driver_id, int vehicle_types_id) {
+
+		List<Vehicles> vehicles = new ArrayList<>();
+
+		try (Connection connection = masterDataObj.getConnection();
+
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT__DRIVER_VEHICLE);) {
+			preparedStatement.setInt(1, vehicle_types_id);
+			preparedStatement.setInt(2, driver_id);
+			System.out.println(preparedStatement);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+
+				int vehicle_id = rs.getInt("vehicle_id");
+				String vehicle_number = rs.getString("vehicle_number");
+				String vehicle_description = rs.getString("vehicle_description");
+				int vehicle_status = rs.getInt("vehicle_status");
+				int vehicle_types_vehicle_types_id = rs.getInt("vehicle_types_vehicle_types_id");
+				int drivers_driver_id = rs.getInt("drivers_driver_id");
+
+				vehicles.add(new Vehicles(vehicle_id, vehicle_number, vehicle_description, vehicle_status,
+						vehicle_types_vehicle_types_id, drivers_driver_id));
+
+			}
+		} catch (SQLException e) {
+			masterDataObj.printSQLException(e);
+		}
+		return vehicles;
+	}
 
 	public boolean insertVehicle(Vehicles vehicles) throws SQLException {
 		boolean rowAdded;
@@ -129,7 +202,30 @@ public class VehiclesDAO {
 
 		try (Connection connection = masterDataObj.getConnection();
 
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_VEHICLE_TYPE_COUNT);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_VEHICLE_COUNT);) {
+			System.out.println(preparedStatement);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				vehicles_count = rs.getInt("vehicles_count");
+			}
+
+		} catch (SQLException e) {
+			masterDataObj.printSQLException(e);
+		}
+
+		return vehicles_count;
+	}
+
+	public int selectVehicleCountByDriver(int driver_id) {
+
+		int vehicles_count = 0;
+
+		try (Connection connection = masterDataObj.getConnection();
+
+				PreparedStatement preparedStatement = connection
+						.prepareStatement(SELECT_VEHICLE_TYPE_COUNT_BY_DRIVER);) {
+			preparedStatement.setInt(1, driver_id);
 			System.out.println(preparedStatement);
 
 			ResultSet rs = preparedStatement.executeQuery();

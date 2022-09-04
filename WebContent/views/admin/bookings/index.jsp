@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+if(session.getAttribute("adminUserId") == null){	
+	response.sendRedirect("/GoCheeta/admin/sign-in");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -300,6 +305,18 @@
 			if(bookingDropTime == ""){
 				bookingDropTime = "-";
 			}
+			if(bookingDriverName == ""){
+				bookingDriverName = "-";
+			}
+			if(bookingDriverTP == ""){
+				bookingDriverTP = "-";
+			}
+			if(bookingVehicleType == ""){
+				bookingVehicleType = "-";
+			}
+			if(bookingVehicleNumber == ""){
+				bookingVehicleNumber = "-";
+			}
 			
 			
 			$('#details-bookingStatus').removeClass();
@@ -334,6 +351,11 @@
 			modal.find('#details-bookingCancelReason').text(bookingCancelReason);
 
 		})
+	</script>
+	<script>
+	if(performance.navigation.type == 2){
+		   location.reload(true);
+		}
 	</script>
 
 </body>

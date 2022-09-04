@@ -23,12 +23,12 @@
 			<h1 class="title" style="text-align: center; margin-bottom: 50px;">SIGN
 				UP</h1>
 			<button class="submit-btn"
-				style="margin-left: 20%; margin-right: 20%; background: #00ffff;">
+				style="margin-left: 20%; margin-right: 20%; background: #00ffff;" onclick="location='/GoCheeta/sign-up'">
 				USER <i class="fa-solid fa-user-astronaut"
 					style="padding-left: 10px;"></i>
 			</button>
 			<button class="submit-btn"
-				style="margin-left: 20%; margin-right: 20%; background: #ffe000;">
+				style="margin-left: 20%; margin-right: 20%; background: #ffe000;" onclick="location='/GoCheeta/driver/sign-up'">
 				DRIVER <i class="fa-solid fa-id-card" style="padding-left: 10px;"></i>
 			</button>
 		</form>

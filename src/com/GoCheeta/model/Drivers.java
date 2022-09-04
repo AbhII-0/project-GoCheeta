@@ -79,6 +79,28 @@ public class Drivers {
 		this.branch_loaction = branch_loaction;
 	}
 
+	public Drivers(String driver_user_name, String driver_password) {
+		super();
+		this.driver_user_name = driver_user_name;
+		this.driver_password = driver_password;
+	}
+
+	public Drivers(int driver_id, String driver_user_name, String driver_email, String driver_tp_number,
+			String driverProfilePic, int driver_account_status, int driver_account_verification, String driver_status,
+			String driver_license_number, int branches_branch_id) {
+		super();
+		this.driver_id = driver_id;
+		this.driver_user_name = driver_user_name;
+		this.driver_email = driver_email;
+		this.driver_tp_number = driver_tp_number;
+		this.driverProfilePic = driverProfilePic;
+		this.driver_account_status = driver_account_status;
+		this.driver_account_verification = driver_account_verification;
+		this.driver_status = driver_status;
+		this.driver_license_number = driver_license_number;
+		this.branches_branch_id = branches_branch_id;
+	}
+
 	public int getDriver_id() {
 		return driver_id;
 	}
