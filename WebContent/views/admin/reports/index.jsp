@@ -1,3 +1,9 @@
+<%@page import="java.util.Collection"%>
+<%@page import="javafx.print.Collation"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="com.GoCheeta.model.Branches"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -113,21 +119,33 @@ if(session.getAttribute("adminUserId") == null){
 						<input type="hidden" id="fromDateResived" value="<c:out value="${fromDate}" />">
 						<input type="hidden" id="toDateResived" value="<c:out value="${toDate}" />">
 						
-						<c:forEach var="branch" items="${listBranches}">
+						<%
+						ArrayList<Branches> branches = (ArrayList<Branches>) request.getAttribute("listBranches");
 						
+						for(int j=0; j<branches.size();j++){
+							int branch_id = branches.get(j).getBranch_id();
+							String branch_loaction = branches.get(j).getBranch_loaction();
+							String fromDate = request.getAttribute("fromDate").toString();
+							String toDate = request.getAttribute("toDate").toString();
+							
+							ArrayList<Branches> branchesRev = (ArrayList<Branches>) request.getAttribute("branchesRev");
+							
+							double total_collection = 0.00;
+							for(int k=0; k<branchesRev.size();k++){
+								if(branch_id == branchesRev.get(k).getBranch_id()){
+									total_collection = branchesRev.get(k).getBranch_total_collection();
+								}
+							}
+						%>
 							<tr>
-								<td>B-00<c:out value="${branch.branch_id}" /></td>
-								<td><c:out value="${branch.branch_loaction}" /></td>
-								<td><c:out value="${fromDate}" /> - <c:out value="${toDate}" /></td>
-								<c:forEach var="branchRev" items="${branchesRev}">
-								<td>RS. <c:if test="${branch.branch_id == branchRev.branch_id}"><c:out value="${branchRev.branch_total_collection}" /></c:if><c:if test="${branch.branch_id != branchRev.branch_id}">0.00</c:if></td>
-								</c:forEach>
-								<c:if test="${branchesRev.size() < 1}">
-								<td>RS. 0.00</td>
-								</c:if>
-								
+								<td>B-00<%=branch_id %></td>
+								<td><%=branch_loaction %></td>
+								<td><%=fromDate %> - <%=toDate %></td>
+							
+								<td>RS. <%= total_collection%></td>
+
 							</tr>
-							</c:forEach>
+							<%} %>
 						</tbody>
 					</table>
 
