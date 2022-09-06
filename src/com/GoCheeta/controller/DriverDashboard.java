@@ -47,7 +47,7 @@ public class DriverDashboard extends HttpServlet {
 
 	}
 
-	private void sendDashboardData(HttpServletRequest request, HttpServletResponse response)
+	protected void sendDashboardData(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
 		int driver_id = -1;
